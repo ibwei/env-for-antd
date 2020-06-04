@@ -1,0 +1,5 @@
+name: GitHub Actions Build and Deploy Project
+on:
+  push:
+    branches:
+      - master
