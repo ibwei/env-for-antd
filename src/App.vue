@@ -6,16 +6,14 @@
       {{ $t('hello') }}
       <a-button @click="changeLang('zhCN')">中文</a-button>
       <a-button @click="changeLang('en')">English</a-button>
+
+      <router-view></router-view>
     </div>
   </a-config-provider>
 </template>
 
 <script>
-import moment from 'moment'
-import 'moment/locale/zh-cn'
 import { locales, setLang } from './i18n/index'
-
-moment.locale('zh-cn')
 export default {
   name: 'App',
   data() {
@@ -24,6 +22,12 @@ export default {
     }
   },
   methods: {
+    getNode(node) {
+      if (node) {
+        return node.parentNode
+      }
+      return document.body
+    },
     changeLang(type) {
       setLang(type)
     },

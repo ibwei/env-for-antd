@@ -1,5 +1,4 @@
 import Axios, { AxiosResponse } from 'axios'
-import Store from '@/store'
 
 /**
  * get status code
@@ -66,7 +65,7 @@ const service = Axios.create({
 service.interceptors.request.use(async (config) => {
   // check network
   if (!navigator.onLine) {
-    Store.__s('httpMessage', 'Request Error')
+    window.message.error('Request Error')
     return Promise.reject(new Error('Request Error'))
   }
 
@@ -95,7 +94,7 @@ service.interceptors.response.use(
     } else {
       const __text = getErrorCode2text(response)
       // global wrong message
-      Store.__s('httpMessage', __text)
+      window.message.error(__text)
       return Promise.reject(response)
     }
   },
@@ -114,7 +113,7 @@ service.interceptors.response.use(
     if (__emsg.indexOf('timeout') >= 0) {
       __emsg = 'timeout'
     }
-    Store.__s('httpMessage', __emsg)
+    window.message.error(__emsg)
     if (error?.response?.data?.code === 401) {
       // nav to login page
       return

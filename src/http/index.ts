@@ -1,3 +1,3 @@
-import * as Market from './market'
+import Market from './market'
 
 export { Market }

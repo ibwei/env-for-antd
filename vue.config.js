@@ -45,7 +45,9 @@ module.exports = {
     sourceMap: IS_DEV,
     loaderOptions: {
       less: {
-        javascriptEnabled: true
+        lessOptions: {
+          javascriptEnabled: true
+        }
       }
     }
   },

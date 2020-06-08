@@ -16,7 +16,12 @@ const routes: Array<RouteConfig> = [
     name: 'home',
     component: import('../App.vue')
   },
-  ...modules
+  ...modules,
+  {
+    path: '*',
+    name: '404',
+    component: require('../views/Error/index.vue').default
+  }
 ]
 
 const router: any = new VueRouter({
