@@ -9,7 +9,6 @@ const getErrorCode2text = (response: AxiosResponse) => {
   const code = response.status
   /** notice text */
   let message = 'Request Error'
-
   switch (code) {
     case 400:
       message = 'Request Error'
@@ -62,13 +61,18 @@ const service = Axios.create({
 })
 
 // request interceptors
+
+interface ApiResponse {
+  err_code: number;
+  err_msg?: string;
+  data?: any;
+}
+
+/**
+ * 返回格式为 {err_code:0|1,err_msg:'string',data:any}
+ */
 service.interceptors.request.use(async (config) => {
   // check network
-  if (!navigator.onLine) {
-    window.message.error('Request Error')
-    return Promise.reject(new Error('Request Error'))
-  }
-
   /* TODO add http headers
    const token = window.localStorage.getItem('token')
    config.headers = {
@@ -84,18 +88,10 @@ service.interceptors.response.use(
   // response valid
   async (response: any) => {
     if (response.status === 200) {
-      // TODO Request status judgment
-      if (response) {
-        return Promise.resolve(response)
-      } else {
-        // login invalid
-        return Promise.reject(response)
-      }
+      return Promise.resolve(response)
     } else {
       const __text = getErrorCode2text(response)
-      // global wrong message
-      window.message.error(__text)
-      return Promise.reject(response)
+      return Promise.reject(new Error(__text))
     }
   },
   // invalid response
@@ -113,12 +109,11 @@ service.interceptors.response.use(
     if (__emsg.indexOf('timeout') >= 0) {
       __emsg = 'timeout'
     }
-    window.message.error(__emsg)
+
     if (error?.response?.data?.code === 401) {
-      // nav to login page
-      return
+      return Promise.reject(new Error('Unauthorized, please login'))
     }
-    return Promise.reject(error)
+    return Promise.reject(new Error(__emsg))
   }
 )
 

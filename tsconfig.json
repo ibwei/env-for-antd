@@ -18,8 +18,8 @@
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "esnext",
-    "types": ["webpack-env"]
+    "types": ["webpack-env", "mocha"]
   },
-  "exclude": ["dist", "node_modules"],
+  "exclude": ["dist", "node_modules", "**/*.spec.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"]
 }

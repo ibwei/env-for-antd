@@ -5,6 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:api": "tsc ./src/api/** --outDir ./src/lib/",
+    "test": "npm run build:api  && ./node_modules/.bin/mocha  --recursive",
+    "test:ts": "npm run build:api && ./node_modules/.bin/mocha -r ./node_modules/ts-node/register  ./test/*.ts",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "commit": "npx git-cz",
@@ -25,6 +28,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.4",
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -35,7 +39,6 @@
     "@vue/cli-plugin-typescript": "^4.3.1",
     "@vue/cli-plugin-unit-mocha": "^4.3.1",
     "@vue/cli-plugin-vuex": "^4.3.1",
-    "less": "^2.7.3",
     "@vue/cli-service": "^4.3.1",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
@@ -52,9 +55,12 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "extract-text-webpack-plugin": "^3.0.2",
+    "less": "^2.7.3",
     "less-loader": "^4.1.0",
+    "mocha": "^7.2.0",
     "prettier": "^2.0.5",
     "terser-webpack-plugin": "^3.0.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.8.3"
   },
   "config": {

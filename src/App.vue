@@ -14,12 +14,16 @@
 
 <script>
 import { locales, setLang } from './i18n/index'
+import API from './api/index'
 export default {
   name: 'App',
   data() {
     return {
       locales
     }
+  },
+  async created() {
+    console.log(API.Market.coin2cash({ coinName: 'btc' }))
   },
   methods: {
     getNode(node) {
