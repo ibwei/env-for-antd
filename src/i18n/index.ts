@@ -30,6 +30,8 @@ const i18n = new VueI18n({
   messages
 })
 
+window.i18n = i18n
+
 // moment转换时间表
 export const TranslateTable = {
   en: 'en_us',

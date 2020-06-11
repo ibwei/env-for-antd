@@ -1,13 +1,22 @@
-import Market from './market.api'
+import { message } from 'ant-design-vue'
 
-const api = { Market }
-
-const API = new Proxy(api, {
-  get(target, propKey, receiver) {
-    const sym = String(propKey)
-    console.log(`getting ${sym}!`)
-    return Reflect.get(target, propKey, receiver)
+// 统一的错误处理
+class ApiService {
+  static async send(request: Promise<any>): Promise<any> {
+    try {
+      const res = await request
+      if (res) {
+        console.log(res)
+        return res
+      } else {
+        console.log(res)
+        return res
+      }
+    } catch ($e) {
+      console.log($e)
+      message.error('Network Error')
+    }
   }
-})
+}
 
-export default API
+export default ApiService

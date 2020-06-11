@@ -1,20 +1,14 @@
 <template>
   <a-config-provider :locale="locales[$store.state.app.language]">
     <div id="app">
-      App.js
-      <a-date-picker />
-      {{ $t('hello') }}
-      <a-button @click="changeLang('zhCN')">中文</a-button>
-      <a-button @click="changeLang('en')">English</a-button>
-
-      <router-view></router-view>
+      <home-page />
     </div>
   </a-config-provider>
 </template>
 
 <script>
+import HomePage from './Layout/HomePage'
 import { locales, setLang } from './i18n/index'
-import API from './api/index'
 export default {
   name: 'App',
   data() {
@@ -22,8 +16,8 @@ export default {
       locales
     }
   },
-  async created() {
-    console.log(API.Market.coin2cash({ coinName: 'btc' }))
+  components: {
+    HomePage
   },
   methods: {
     getNode(node) {
@@ -49,4 +43,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>
