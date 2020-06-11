@@ -1,7 +1,7 @@
 import HTTP from './request'
 interface HttpParams {
-  coinName: string;
-  cashName: string;
+  coinName?: string;
+  cashName?: string;
 }
 
 export interface MarketApi {
@@ -14,6 +14,8 @@ export interface MarketApi {
  */
 class Market {
   static coin2cash(param: HttpParams): Promise<any> {
+    param.coinName = param.coinName ? param.coinName : 'btc'
+    param.cashName = param.cashName ? param.cashName : 'cny'
     let targetCoin = ''
     switch (param.coinName.toLowerCase()) {
       case 'tbtc':

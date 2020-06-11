@@ -1,18 +1,13 @@
 <template>
   <a-config-provider :locale="locales[$store.state.app.language]">
     <div id="app">
-      App.js
-      <a-date-picker />
-      {{ $t('hello') }}
-      <a-button @click="changeLang('zhCN')">中文</a-button>
-      <a-button @click="changeLang('en')">English</a-button>
-
-      <router-view></router-view>
+      <home-page />
     </div>
   </a-config-provider>
 </template>
 
 <script>
+import HomePage from './Layout/HomePage'
 import { locales, setLang } from './i18n/index'
 export default {
   name: 'App',
@@ -20,6 +15,9 @@ export default {
     return {
       locales
     }
+  },
+  components: {
+    HomePage
   },
   methods: {
     getNode(node) {
@@ -45,4 +43,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>
