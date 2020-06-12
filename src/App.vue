@@ -52,4 +52,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less">
+@import url('./App.less');
+@import url('./styles/global');
+</style>

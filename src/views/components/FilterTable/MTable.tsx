@@ -1,9 +1,11 @@
+// @ts-nocheck
+/* eslint-disable */ 
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Popconfirm, Table, Dropdown, Menu, Button, Icon } from 'ant-design-vue'
 import { tableList, Opreat } from '@/interface'
-import Spin from '@/views/components/Spin'
+import Spin from '@/views/components/Spin/index'
 import './MTable.less'
-import axios, { Method, ResponseType } from 'axios'
+import axios from 'axios'
 
 @Component({
   components: {
@@ -22,7 +24,7 @@ export default class MTable extends Vue {
 
   @Prop() private url!: string
 
-  @Prop() private dataType!: ResponseType
+  @Prop() private dataType!: string
 
   @Prop() private expandedRowRender!: (record: any) => void
 
@@ -66,7 +68,7 @@ export default class MTable extends Vue {
   @Prop() private tableParams!: any
 
   // 请求类型
-  @Prop({ default: 'post' }) private fetchType!: Method
+  @Prop({ default: 'post' }) private fetchType!: string
 
   // 表格分页大小参数
   @Prop({ default: () => ['5', '10', '15', '20', '50', '100'] }) private pageSizeList!: number[]
@@ -79,6 +81,7 @@ export default class MTable extends Vue {
 
   // data
   tableData: any = []
+
   pageParams: {
     pageSize: number;
     pageNum: number;
@@ -112,7 +115,7 @@ export default class MTable extends Vue {
       .request({
         url: this.url,
         method: this.fetchType,
-        responseType: this.dataType,
+        fetchType: this.dataType,
         data: Object.assign(this.tableParams ? this.tableParams : {}, this.pageParams, this.outParams)
       })
       .then((res: any) => {
@@ -135,7 +138,7 @@ export default class MTable extends Vue {
   getValue(position: string, res: any) {
     let data = JSON.parse(JSON.stringify(res))
     const keyList = position.split('.')
-    keyList.forEach((item) => {
+    keyList.forEach((item, index) => {
       if (data !== null && data[item] !== null) {
         data = data[item]
       } else {
@@ -168,7 +171,7 @@ export default class MTable extends Vue {
       })
     }
     return (
-      <div class="m-table">
+      <div class='m-table'>
         <a-table
           bordered
           loading={this.loading}
@@ -200,15 +203,15 @@ export default class MTable extends Vue {
    * @param {object} record 当前行的值
    * @param {number} index 当前列的序列号
    */
-  opreatJSX(record: any) {
+  opreatJSX(text: any, record: any, index: number) {
     // 操作超过4个，就用下拉菜单方式
     if (this.opreat.length > 4) {
       return (
         <a-dropdown on-command={(command: string) => this.menuClick(command, record)}>
-          <a-button type="dashed" size="small" style="margin-left: 8px">
-            操作栏 <a-icon type="down" />
+          <a-button type='dashed' size='small' style='margin-left: 8px'>
+            操作栏 <a-icon type='down' />
           </a-button>
-          <a-menu slot="overlay">
+          <a-menu slot='overlay'>
             {this.opreat.map((item, indexs) => (
               <a-menu-item key={indexs} command={item.key} disabled={item.disabled && item.disabled(record)}>
                 {typeof item.text === 'function' ? item.text(record) : item.text}
@@ -220,7 +223,7 @@ export default class MTable extends Vue {
     }
     // 普通模式
     return (
-      <div class="table-opreat">
+      <div class='table-opreat'>
         {this.opreat.map((item, indexs) => {
           const whiteList = ['red', 'orange']
           if (item.popconfirm) {
@@ -234,7 +237,7 @@ export default class MTable extends Vue {
           }
           if (item.disabled && item.disabled(record)) {
             return (
-              <a id={`${item.key}-${record[item.rowKey]}`} key={indexs} class="btn disabled">
+              <a id={`${item.key}-${record[item.rowKey]}`} key={indexs} class='btn disabled'>
                 {typeof item.text === 'function' ? item.text(record) : item.text}
               </a>
             )
@@ -258,7 +261,7 @@ export default class MTable extends Vue {
     )
   }
 
-  tableChange(pagination: any) {
+  tableChange(pagination: any, filters: any, sorter: any) {
     this.pageParams.pageSize = pagination.pageSize
     this.pageParams.pageNum = pagination.current
     this.getData()

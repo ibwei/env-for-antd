@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { Card, DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Form, Tabs, Table, Input, Alert, Checkbox, Row, Col, Popover, Progress } from 'ant-design-vue'
+import { Card, DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Form, Tabs, Table, Input, Alert, Checkbox, Row, Col, Popover, Progress, Tag } from 'ant-design-vue'
+
 import '../styles/index.less'
 
 Vue.prototype.$message = message
@@ -14,6 +15,7 @@ Vue.use(ConfigProvider)
 Vue.use(Select.Option)
 Vue.use(Result)
 Vue.use(Menu)
+Vue.use(Table)
 Vue.use(Layout)
 Vue.use(Layout.Sider)
 Vue.use(Layout.Header)
@@ -22,7 +24,6 @@ Vue.use(Form)
 Vue.use(Form.Item)
 Vue.use(Tabs)
 Vue.use(Tabs.TabPane)
-Vue.use(Table)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Input)
@@ -32,3 +33,4 @@ Vue.use(Checkbox)
 Vue.use(Card)
 Vue.use(Popover)
 Vue.use(Progress)
+Vue.use(Tag)

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="border:1px solid red;">
     <home-layout v-if="c_login" />
     <router-view v-else></router-view>
   </div>
@@ -17,4 +17,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>

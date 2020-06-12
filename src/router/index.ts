@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const files = require.context('.', true, /\.ts$/)
 const modules: Array<any> = []
-files.keys().forEach(key => {
+files.keys().forEach((key) => {
   if (key === './index.ts') return
   modules.push(files(key).default)
 })
@@ -15,6 +15,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'home',
     component: import('../App.vue')
+  },
+  {
+    path: '/my-borrow',
+    name: 'my-borrow',
+    component: () => import('@/views/my-borrow.tsx')
   },
   ...modules,
   {
