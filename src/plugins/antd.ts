@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu } from 'ant-design-vue'
+import { DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Table } from 'ant-design-vue'
 import '../styles/index.less'
 
 Vue.prototype.$message = message
@@ -14,6 +14,7 @@ Vue.use(ConfigProvider)
 Vue.use(Select.Option)
 Vue.use(Result)
 Vue.use(Menu)
+Vue.use(Table)
 Vue.use(Layout)
 Vue.use(Layout.Sider)
 Vue.use(Layout.Header)
