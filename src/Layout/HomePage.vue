@@ -2,20 +2,7 @@
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-        <a-menu-item key="1">
-          <a-icon type="user" />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span>nav 3</span>
-        </a-menu-item>
-      </a-menu>
+      <sidebar :MenuList="SidebarList" />
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0;">
@@ -28,11 +15,17 @@
   </a-layout>
 </template>
 <script>
+import Sidebar from '@/views/components/Sidebar'
+import { SidebarList } from '../utils/config'
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
+      SidebarList
     }
+  },
+  components: {
+    Sidebar
   }
 }
 </script>
