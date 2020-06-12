@@ -7,7 +7,6 @@ const files = require.context('.', true, /\.ts$/)
 const modules: Array<any> = []
 files.keys().forEach(key => {
   if (key === './index.ts') return
-  console.log(key)
   modules.push(files(key).default)
 })
 
@@ -26,7 +25,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '*',
     name: '404',
-    component: require('../views/Error/index.vue').default
+    component: require('../views/error/index.vue').default
   }
 ]
 

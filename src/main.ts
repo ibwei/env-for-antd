@@ -12,7 +12,7 @@ Vue.use(Network)
 
 Vue.config.productionTip = false
 
-new Vue({
+export default new Vue({
   router,
   i18n,
   store,
