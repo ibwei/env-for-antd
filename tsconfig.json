@@ -15,7 +15,7 @@
       "@/*": ["src/*"]
     },
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "suppressImplicitAnyIndexErrors": true,
     "target": "esnext",
     "types": ["webpack-env", "mocha"]

@@ -1,15 +1,13 @@
 import HTTP from './request'
 interface HttpParams {
-  coinName: string;
-  cashName: string;
+  coinName: string
+  cashName: string
 }
 
-interface LoginParams {
-
-}
+interface LoginParams {}
 
 export interface UserApi {
-  coin2cash(param: HttpParams): Promise<any>;
+  coin2cash(param: HttpParams): Promise<any>
 }
 
 /**
@@ -26,4 +24,4 @@ class User {
   }
 }
 
-export default Market
+export default User
