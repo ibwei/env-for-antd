@@ -2,34 +2,7 @@
   <div class="login">
     <div class="login-content">
       <a-card size="small" style="width: 350px; padding: 0 30px;">
-        <p class="title">欢迎登录迪富</p>
-        <a-form :model="formLogin" :rules="rules" style="width: auto;" ref="formLogin">
-          <a-form-item prop="account" class="login-form-item">
-            <a-input v-model="formLogin.account" placeholder="请输入手机号/邮箱" class="item" :maxlength="255" :minlength="6"></a-input>
-          </a-form-item>
-          <a-form-item prop="password" class="login-form-item">
-            <a-input v-model="formLogin.password" :show-password="true" autocomplete="new-password" placeholder="登录密码" :maxlength="255" :minlength="6"></a-input>
-          </a-form-item>
-          <a-form-item prop="isVerify" class="login-form-item">
-            <sliderValidation @handleSuccess="getVerify"></sliderValidation>
-          </a-form-item>
-          <a-form-item class="login-form-item">
-            <a-checkbox v-model="isRemenber">记住用户名</a-checkbox>
-          </a-form-item>
-          <a-form-item class="login-form-item">
-            <a-button type="primary" :loading="loadingLogin" class="login-btn" @click="handleSubmit">
-              登录
-            </a-button>
-          </a-form-item>
-          <a-form-item class="login-form-item">
-            <router-link tag="span" class="link-btn" :to="{ name: 'password' }">
-              忘记密码？
-            </router-link>
-            <router-link tag="span" class="link-btn" :to="{ name: 'register' }">
-              免费注册？
-            </router-link>
-          </a-form-item>
-        </a-form>
+        <slot></slot>
       </a-card>
     </div>
   </div>

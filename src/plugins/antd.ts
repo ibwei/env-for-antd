@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Form, Tabs, Table, Input, Alert, Checkbox, Row, Col } from 'ant-design-vue'
+import { Card, DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Form, Tabs, Table, Input, Alert, Checkbox, Row, Col, Popover, Progress } from 'ant-design-vue'
 import '../styles/index.less'
 
 Vue.prototype.$message = message
@@ -29,3 +29,6 @@ Vue.use(Input)
 Vue.use(Input.Password)
 Vue.use(Alert)
 Vue.use(Checkbox)
+Vue.use(Card)
+Vue.use(Popover)
+Vue.use(Progress)

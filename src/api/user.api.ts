@@ -26,4 +26,4 @@ class User {
   }
 }
 
-export default Market
+export default User
