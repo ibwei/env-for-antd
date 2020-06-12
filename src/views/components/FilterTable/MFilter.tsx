@@ -119,9 +119,10 @@ class MFilterClass extends Vue {
   }
 
   @Emit()
-  levelcodeChange(val: any): void {
+  levelcodeChange(val: any, key: any): void {
     const value = JSON.parse(JSON.stringify(val))
     this.params.levelCode = value.pop()
+    console.log(key)
   }
 
   @Emit()
