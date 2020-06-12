@@ -58,7 +58,7 @@ export const SidebarList = [
   }, {
     key: '3',
     title: '个人中心',
-    icon: ' user',
+    icon: 'user',
     children: [
       {
         key: '3-0',
