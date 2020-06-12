@@ -35,7 +35,7 @@ const BUILD = (webpackConfig) => {
 }
 
 module.exports = {
-  publicPath: IS_DEV ? '/' : '/',
+  publicPath: IS_DEV ? '/' : process.env.VUE_APP_PUBLICPATH,
   outputDir: 'dist',
   assetsDir: 'static',
   productionSourceMap: IS_DEV,
@@ -51,11 +51,11 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    open: true,
-    port: 8888,
-    proxy: null
-  },
+  // devServer: {
+  //   open: true,
+  //   port: 8888,
+  //   proxy: null
+  // },
   configureWebpack: {
     optimization: {
       minimizer: [

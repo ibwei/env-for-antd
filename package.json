@@ -17,6 +17,8 @@
     "ant-design-vue": "^1.6.2",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "crypto-js": "^4.0.0",
+    "jsencrypt": "^3.0.0-rc.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-i18n": "^8.17.4",

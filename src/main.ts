@@ -5,6 +5,10 @@ import store from '@/store'
 import '@/plugins'
 import '@/components'
 import App from './App.vue'
+import Network from '@/network'
+import '@/network/axios'
+
+Vue.use(Network)
 
 Vue.config.productionTip = false
 
