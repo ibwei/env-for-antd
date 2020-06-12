@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Emit, Vue, Inject, Provide } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Loader extends Vue {

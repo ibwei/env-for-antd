@@ -20,7 +20,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '*',
     name: '404',
-    component: require('../views/Error/index.vue').default
+    component: require('../views/error/index.vue').default
   }
 ]
 

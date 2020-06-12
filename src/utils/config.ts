@@ -52,7 +52,28 @@ export const SidebarList = [
       },
       {
         key: '2-2',
-        title: '成长记录'
+        title: '成交记录'
+      }
+    ]
+  }, {
+    key: '3',
+    title: '个人中心',
+    icon: ' user',
+    children: [
+      {
+        key: '3-0',
+        title: '基本信息'
+      },
+      {
+        key: '3-1',
+        title: ' 安全设置'
+      },
+      {
+        key: '3-2',
+        title: '支付设置'
+      }, {
+        key: '3-3',
+        title: '迪富 U 盾'
       }
     ]
   }
