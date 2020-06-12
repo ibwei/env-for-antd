@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import SliderValidation from '@/components/sliderValidation.vue'
+import SliderValidation from '@/views/components/SliderValidation.vue'
 import { isMobile, isEmail } from '@/utils/validate'
 import store from '@/store'
 
@@ -95,73 +95,67 @@ export default {
     }
   },
   created() {
-    let user_login = getStorage('user_login')
-    if (user_login) {
-      this.formLogin.account = user_login
-      this.isRemenber = true
-    }
+    // const user_login = getStorage('user_login')
+    // if (user_login) {
+    //   this.formLogin.account = user_login
+    //   this.isRemenber = true
+    // }
     // 从登陆页面跳转过来
-    let account = this.$route.query.account
+    const account = this.$route.query.account
     if (account) {
       this.formLogin.account = account
     }
   },
   computed: {
-    ...mapState({
-      userInfo: (state) => state.user.userInfo
-    })
+    userInfo: (vm) => vm.$store.__s('user.userInfo')
   },
   methods: {
-    ...mapMutations('user', ['updateUserToken', 'updateUserInfo']),
+    // ...mapMutations('user', ['updateUserToken', 'updateUserInfo']),
     handleSubmit: function () {
-      this.$refs['formLogin'].validate((valid) => {
+      this.$refs.formLogin.validate((valid) => {
         if (valid) {
           this.loadingLogin = true
           this.login()
         }
       })
     },
-    login: async function () {
+    async login() {
       try {
-        const params = {
+        console.log('hh')
+        /* const params = {
           account: this.formLogin.account,
           password: this.formLogin.password
         }
-        let res = await this.$Network.LoginService.login(params)
-        if (this.isRemenber) {
-          setStorage('user_login', this.formLogin.account)
+        const res = await this.$Network.LoginService.login(params)
+         if (this.isRemenber) {
+          this.('user_login', this.formLogin.account)
         } else {
           setStorage('user_login', '')
         }
-        /**
-         * 这里分两步分别存储用户信息和用户token
-         * 因为还有一个接口是专门获取用户信息的，
-         * 如果这样直接更新，用户token就被覆盖没有了。
-         */
         if (res && res.data) {
           const { uri } = this.$route.query
-          this.updateUserToken(res.data.tokenResultBO)
-          this.updateUserInfo(res.data.userMain)
+          this.$store.__s('user.token', res.data.tokenResultBO)
+          this.$store.__s('user', res.data.userMain)
           if (uri) {
             window.location.href = uri
           } else {
             this.$router.push('Home')
           }
-        }
+        } */
       } catch (error) {
         console.log(error)
       }
 
       this.loadingLogin = false
     },
-    getVerify: function () {
+    getVerify() {
       this.formLogin.isVerify = true
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .login {
   height: 100%;
   padding: 90px 120px 0;
@@ -177,7 +171,6 @@ export default {
     width: 100%;
   }
   .link-btn {
-    color: $loginText;
     margin-right: 36px;
     font-size: 14px;
     cursor: pointer;

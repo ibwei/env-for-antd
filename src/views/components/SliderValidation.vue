@@ -12,11 +12,11 @@ export default {
   props: {},
   data() {
     return {
-      beginClientX: 0 /*距离屏幕左端距离*/,
-      mouseMoveStata: false /*触发拖动状态  判断*/,
-      maxwidth: '' /*拖动最大宽度，依据滑块宽度算出来的*/,
-      confirmWords: '请按住滑块，拖动到最右边' /*滑块文字*/,
-      confirmSuccess: false /*验证成功判断*/
+      beginClientX: 0, // 距离屏幕左端距离
+      mouseMoveStata: false, // 触发拖动状态  判断
+      maxwidth: '', // 拖动最大宽度，依据滑块宽度算出来的
+      confirmWords: '请按住滑块，拖动到最右边', // 滑块文字
+      confirmSuccess: false // 验证成功判断
     }
   },
   mounted() {
@@ -33,11 +33,11 @@ export default {
     document.getElementsByTagName('html')[0].removeEventListener('touchend', this.moseUpFn)
   },
   methods: {
-    //mousedoen 事件
+    // mousedoen 事件
     mousedownFn: function (e) {
       let touch
       if (!this.confirmSuccess) {
-        e.preventDefault && e.preventDefault() //阻止文字选中等 浏览器默认事件
+        e.preventDefault && e.preventDefault() // 阻止文字选中等 浏览器默认事件
         this.mouseMoveStata = true
         if (e.touches) {
           touch = e.touches[0]
@@ -47,7 +47,7 @@ export default {
         this.beginClientX = touch.clientX
       }
     },
-    //验证成功函数
+    // 验证成功函数
     successFunction: function () {
       this.confirmSuccess = true
       this.confirmWords = '验证通过'
@@ -56,13 +56,13 @@ export default {
         document.getElementsByTagName('html')[0].removeEventListener('mousemove', this.mouseMoveFn)
         document.getElementsByTagName('html')[0].removeEventListener('mouseup', this.moseUpFn)
       } else {
-        document.getElementsByTagName('html')[0].removeEventListener('mouseup', () => {})
+        document.getElementsByTagName('html')[0].removeEventListener('mouseup')
       }
       document.getElementsByClassName('drag_text')[0].style.color = '#555'
       document.getElementsByClassName('handler')[0].style.left = this.maxwidth + 'px'
       document.getElementsByClassName('drag_bg')[0].style.width = this.maxwidth + 'px'
     },
-    //mousemove事件
+    // mousemove事件
     mouseMoveFn: function (e) {
       if (this.mouseMoveStata) {
         let touch
@@ -71,7 +71,7 @@ export default {
         } else {
           touch = e
         }
-        let width = touch.clientX - this.beginClientX
+        const width = touch.clientX - this.beginClientX
         if (width > 0 && width <= this.maxwidth) {
           document.getElementsByClassName('handler')[0].style.left = width + 'px'
           document.getElementsByClassName('drag_bg')[0].style.width = width + 'px'
@@ -80,8 +80,8 @@ export default {
         }
       }
     },
-    //mouseup事件
-    moseUpFn: function (e) {
+    // mouseup事件
+    moseUpFn(e) {
       let touch
       let width = 0
       if (e.touches) {
