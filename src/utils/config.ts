@@ -8,7 +8,7 @@ export const SidebarList: Array<SidebarOption> = [
       {
         key: '0-1',
         title: '当前发布',
-        routePath: '/user/login'
+        routePath: '/moneyBorrowed/release'
       },
       {
         key: '0-2',
@@ -57,7 +57,8 @@ export const SidebarList: Array<SidebarOption> = [
         title: '成交记录'
       }
     ]
-  }, {
+  },
+  {
     key: '3',
     title: '个人中心',
     icon: 'user',
@@ -73,7 +74,8 @@ export const SidebarList: Array<SidebarOption> = [
       {
         key: '3-2',
         title: '支付设置'
-      }, {
+      },
+      {
         key: '3-3',
         title: '迪富 U 盾'
       }

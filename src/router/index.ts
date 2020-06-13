@@ -16,11 +16,6 @@ const routes: Array<RouteConfig> = [
     name: 'home',
     component: import('../App.vue')
   },
-  {
-    path: '/my-borrow',
-    name: 'my-borrow',
-    component: () => import('@/views/moneyBorrowed/my-borrow')
-  },
   ...modules,
   {
     path: '*',
