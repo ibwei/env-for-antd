@@ -14,7 +14,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'home',
-    component: import('../App.vue')
+    component: require('../App.vue').default
   },
   ...modules,
   {

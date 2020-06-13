@@ -28,7 +28,7 @@ const store: Store<any> & MagicMethod & any = new Vuex.Store({
   modules,
   plugins: [
     VuexPersistedState({
-      paths: ['app.language', 'app.languageName']
+      paths: ['app.language', 'app.languageName', 'user.login', 'user.userInfo', 'user.token']
     })
   ]
 })

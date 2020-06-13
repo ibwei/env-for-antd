@@ -24,13 +24,16 @@ import {
   Tag,
   Dropdown,
   Badge,
-  Avatar
+  Avatar,
+  FormModel
 } from 'ant-design-vue'
 import '../styles/index.less'
 
 Vue.prototype.$message = message
 window.message = message
 
+Vue.use(FormModel)
+Vue.use(FormModel.Item)
 Vue.use(Avatar)
 Vue.use(Dropdown)
 Vue.use(Badge)

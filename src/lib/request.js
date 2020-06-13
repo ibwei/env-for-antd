@@ -121,7 +121,7 @@ function (response) { return __awaiter(void 0, void 0, void 0, function () {
         }
         else {
             __text = getErrorCode2text(response);
-            return [2 /*return*/, Promise.reject({ err_code: 1, err_msg: __text })];
+            return [2 /*return*/, Promise.reject(new Error(__text))];
         }
         return [2 /*return*/];
     });
@@ -141,8 +141,8 @@ function (error) {
         __emsg = 'timeout';
     }
     if (((_b = (_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.code) === 401) {
-        return Promise.reject({ err_code: 1, err_msg: '', error: error });
+        return Promise.reject(new Error('Unauthorized, please login'));
     }
-    return Promise.reject({ err_code: 1, err_msg: '', error: error });
+    return Promise.reject(new Error(__emsg));
 });
 exports["default"] = service;

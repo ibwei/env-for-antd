@@ -16,4 +16,4 @@ var User = /** @class */ (function () {
     };
     return User;
 }());
-exports["default"] = Market;
+exports["default"] = User;

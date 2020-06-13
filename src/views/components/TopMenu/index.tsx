@@ -103,15 +103,13 @@ export default class Spin extends Vue {
           <li class='user'>
             <a-dropdown>
               <span class='ant-dropdown-link'>
-                <a-avatar
-                  src={
-                    this.c_userInfo
-                      ? this.c_userInfo
-                      : 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-                  }
-                />
+                {this.c_userInfo?.nickImage ? (
+                  <a-avatar size={26} src={this.c_userInfo.nickImage} />
+                ) : (
+                  <a-avatar size={26} icon='user' />
+                )}
                 <span class='name'>
-                  {this.c_userInfo?.username ? this.c_userInfo.username : 'Yours'}
+                  {this.c_userInfo?.nickName ? this.c_userInfo.nickName : '匿名'}
                 </span>
               </span>
               <a-menu slot='overlay' on-click={this.menuClick}>

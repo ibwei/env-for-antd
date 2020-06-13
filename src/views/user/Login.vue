@@ -3,33 +3,48 @@
     <template #form>
       <div>
         <p class="title">欢迎登录迪富</p>
-        <a-form :model="formLogin" :rules="rules" style="width: auto;" ref="formLogin">
-          <a-form-item prop="account" class="login-form-item">
-            <a-input v-model="formLogin.account" placeholder="请输入手机号/邮箱" class="item" :maxlength="255" :minlength="6"></a-input>
-          </a-form-item>
-          <a-form-item prop="password" class="login-form-item">
-            <a-input v-model="formLogin.password" :show-password="true" autocomplete="new-password" placeholder="登录密码" :maxLength="255" :minLength="6"></a-input>
-          </a-form-item>
-          <a-form-item prop="isVerify" class="login-form-item">
+        <a-form-model :model="formLogin" :rules="rules" style="width: auto;" ref="formLogin">
+          <a-form-model-item label="" prop="account" class="login-form-item">
+            <a-input
+              class="item"
+              :maxLength="255"
+              placeholder="请输入手机号/邮箱"
+              v-model="formLogin.account"
+            ></a-input>
+          </a-form-model-item>
+          <a-form-model-item label="" class="login-form-item" prop="password">
+            <a-input-password
+              class="item"
+              :maxLength="255"
+              placeholder="登录密码"
+              v-model="formLogin.password"
+            ></a-input-password>
+          </a-form-model-item>
+          <a-form-model-item prop="isVerify" class="login-form-item">
             <slider-validation @handleSuccess="getVerify"></slider-validation>
-          </a-form-item>
-          <a-form-item class="login-form-item">
+          </a-form-model-item>
+          <a-form-model-item class="login-form-item">
             <a-checkbox v-model="isRemenber">记住用户名</a-checkbox>
-          </a-form-item>
-          <a-form-item class="login-form-item">
-            <a-button type="primary" :loading="loadingLogin" class="login-btn" @click="handleSubmit">
+          </a-form-model-item>
+          <a-form-model-item class="login-form-item">
+            <a-button
+              type="primary"
+              :loading="loadingLogin"
+              class="login-btn"
+              @click="handleSubmit"
+            >
               登录
             </a-button>
-          </a-form-item>
-          <a-form-item class="login-form-item">
+          </a-form-model-item>
+          <a-form-model-item class="login-form-item">
             <router-link tag="span" class="link-btn" :to="{ name: 'password' }">
               忘记密码？
             </router-link>
             <router-link tag="span" class="link-btn" :to="{ name: 'register' }">
               免费注册？
             </router-link>
-          </a-form-item>
-        </a-form>
+          </a-form-model-item>
+        </a-form-model>
       </div>
     </template>
   </userform-layout>
@@ -83,9 +98,9 @@ export default {
       isRemenber: false,
       CountdownService: {},
       formLogin: {
-        account: '',
-        password: '',
-        isVerify: ''
+        account: '18483641399',
+        password: 'z123456',
+        isVerify: false
       },
       rules: {
         account: [{ validator: accountVerify, trigger: 'blur' }],
@@ -115,36 +130,36 @@ export default {
         if (valid) {
           this.loadingLogin = true
           this.login()
+        } else {
+          this.$message.warning('请按照提示输入')
         }
       })
     },
     async login() {
       try {
-        console.log('hh')
-        /* const params = {
+        const params = {
           account: this.formLogin.account,
           password: this.formLogin.password
         }
         const res = await this.$Network.LoginService.login(params)
-         if (this.isRemenber) {
-          this.('user_login', this.formLogin.account)
-        } else {
-          setStorage('user_login', '')
+        if (this.isRemenber) {
+          this.$store.__s('remenberList', this.formLogin)
         }
         if (res && res.data) {
+          console.log(res)
           const { uri } = this.$route.query
           this.$store.__s('user.token', res.data.tokenResultBO)
-          this.$store.__s('user', res.data.userMain)
+          this.$store.__s('user.userInfo', res.data.userMain)
+          this.$store.__s('user.login', true)
           if (uri) {
             window.location.href = uri
           } else {
-            this.$router.push('Home')
+            window.location.replace('/')
           }
-        } */
+        }
       } catch (error) {
         console.log(error)
       }
-
       this.loadingLogin = false
     },
     getVerify() {
