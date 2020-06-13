@@ -1,4 +1,14 @@
-import { SidebarOption } from '@/views/components/Sidebar/index'
+import { LanguageOption, SidebarOption } from '@/interface'
+export const LanguageList: Array<LanguageOption> = [
+  {
+    name: '中文简体',
+    value: 'zhCN'
+  },
+  {
+    name: 'English',
+    value: 'en'
+  }
+]
 export const SidebarList: Array<SidebarOption> = [
   {
     key: '0',

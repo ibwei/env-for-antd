@@ -1,4 +1,3 @@
-// tsx 写法
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import './index.less'
 
@@ -21,9 +20,7 @@ export default class Spin extends Vue {
             </span>
             <div>{this.text}</div>
           </div>
-        ) : (
-          ''
-        )}
+        ) : null}
       </div>
     )
   }

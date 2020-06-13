@@ -1,5 +1,6 @@
-import { VNode } from 'vue';
-import { ScopedSlot } from 'vue/types/vnode';
+/* eslint-disable */
+import { VNode } from 'vue'
+import { ScopedSlot } from 'vue/types/vnode'
 
 /**
  * @interface 筛选表格的表单参数
@@ -302,4 +303,17 @@ export interface MapCarData {
 export interface Point {
   lng: number;
   lat: number;
+}
+export interface LanguageOption {
+  name: string;
+  icon?: string;
+  value: string;
+}
+
+export interface SidebarOption {
+  key: string;
+  title: string;
+  routePath?: string;
+  icon?: string;
+  children?: Array<SidebarOption>;
 }

@@ -10,7 +10,7 @@
 <script>
 import AppLayout from './Layout/AppLayout'
 import Loader from './views/components/Loader/index.vue'
-import { locales, setLang } from './i18n/index'
+import { locales } from './i18n/index'
 
 export default {
   name: 'App',
@@ -23,23 +23,12 @@ export default {
     AppLayout,
     Loader
   },
-  created() {
-    setTimeout(() => {
-      this.$store.__s('spinning', true)
-    }, 1000)
-  },
   methods: {
     getNode(node) {
       if (node) {
         return node.parentNode
       }
       return document.body
-    },
-    changeLang(type) {
-      setLang(type)
-    },
-    sayHello() {
-      this.$message.success('你好')
     }
   },
   i18n: {

@@ -1,12 +1,5 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
-
-export interface SidebarOption {
-  key: string;
-  title: string;
-  routePath?: string;
-  icon?: string;
-  children?: Array<SidebarOption>;
-}
+import { SidebarOption } from '@/interface/index'
 
 @Component
 export default class Spin extends Vue {
@@ -48,10 +41,14 @@ export default class Spin extends Vue {
   renderMenuList(menuItem: SidebarOption) {
     // 有子菜单渲染
     if (menuItem?.children) {
-      const childList = menuItem.children.map((item) => <a-menu-item key={item.key} onClick={this.navToPath.bind(null, item.routePath)}>{item.title}</a-menu-item>)
+      const childList = menuItem.children.map((item) => (
+        <a-menu-item key={item.key} onClick={this.navToPath.bind(null, item.routePath)}>
+          {item.title}
+        </a-menu-item>
+      ))
       return (
         <a-sub-menu key={menuItem.key}>
-          <span slot="title">
+          <span slot='title'>
             <a-icon type={menuItem.icon} />
             <span>{menuItem.title}</span>
           </span>
@@ -61,7 +58,7 @@ export default class Spin extends Vue {
     }
     // 无子菜单的渲染
     return (
-      <a-menu-item key={menuItem.key} onClick={this.navToPath.bind(null, menuItem.routePath)} >
+      <a-menu-item key={menuItem.key} onClick={this.navToPath.bind(null, menuItem.routePath)}>
         <a-icon type={menuItem.icon} />
         <span>{menuItem.title}</span>
       </a-menu-item>
@@ -71,7 +68,7 @@ export default class Spin extends Vue {
   render() {
     const menuList = this.MenuList.map((item) => this.renderMenuList(item))
     return (
-      <a-menu theme="dark" mode="inline" openKeys={this.openKeys} defaultSelectedKeys={this.currentKey} onOpenChange={this.onOpenChange}>
+      <a-menu theme='dark' mode='inline' openKeys={this.openKeys} defaultSelectedKeys={this.currentKey} onOpenChange={this.onOpenChange}>
         {menuList}
       </a-menu>
     )

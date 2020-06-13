@@ -1,12 +1,14 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div class="logo" />
+      <div class="logo">
+        <img class="logo-img" src="../assets/logo.png" />
+      </div>
       <sidebar :MenuList="SidebarList" />
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0;">
-        <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
+        <top-menu :collapsed="collapsed" @change-fold="() => (this.collapsed = !this.collapsed)" />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '400px' }">
         <router-view></router-view>
@@ -16,6 +18,7 @@
 </template>
 <script>
 import Sidebar from '@/views/components/Sidebar'
+import TopMenu from '@/views/components/TopMenu'
 import { SidebarList } from '../utils/config'
 export default {
   data() {
@@ -25,7 +28,8 @@ export default {
     }
   },
   components: {
-    Sidebar
+    Sidebar,
+    TopMenu
   }
 }
 </script>
@@ -46,8 +50,16 @@ export default {
 }
 
 #components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
+  height: 64px;
+  background: #06274d;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img {
+  height: 56px;
+  width: auto;
 }
 </style>
