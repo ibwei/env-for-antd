@@ -1,7 +1,7 @@
 <template>
   <a-config-provider :locale="locales[$store.state.app.language]">
     <div id="app">
-      <loader :spinning="$store.__s('spinning')" fullScreen></loader>
+      <loader :spinning="!$store.__s('spinning')" fullScreen></loader>
       <app-layout />
     </div>
   </a-config-provider>

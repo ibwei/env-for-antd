@@ -21,6 +21,23 @@ export default class Spin extends Vue {
     return Store.__s('app.languageName')
   }
 
+  created() {
+    this.initLanguageName()
+  }
+
+  initLanguageName(): void {
+    if (!this.c_languageName) {
+      const lang = Store.__s('app.language')
+      const len = LanguageList.length
+      for (let i = 0; i < len; i++) {
+        if (LanguageList[i].value === lang) {
+          Store.__s('app.languageName', LanguageList[i].name)
+          break
+        }
+      }
+    }
+  }
+
   @Emit()
   menuClick(params: { item: any; key: string; keyPath: string[] }): void {
     switch (params.key) {
@@ -47,13 +64,20 @@ export default class Spin extends Vue {
     // 渲染语言列表
     const languageList = LanguageList.map((item, index) => (
       <a-menu-item key={index}>
-        <a-badge status={item.value === Store.__s('app.language') ? 'success' : 'default'} text={item.name} />
+        <a-badge
+          status={item.value === Store.__s('app.language') ? 'success' : 'default'}
+          text={item.name}
+        />
         <a-menu-divider />
       </a-menu-item>
     ))
     return (
       <div class='topmenu-wrap'>
-        <a-icon class='trigger' type={this.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.changeFold} />
+        <a-icon
+          class='trigger'
+          type={this.collapsed ? 'menu-unfold' : 'menu-fold'}
+          onClick={this.changeFold}
+        />
         <ul class='header-menu'>
           <li class='user' style='width:20px;'>
             <a-icon style={{ fontSize: '18px' }} type='question-circle' />
@@ -79,8 +103,16 @@ export default class Spin extends Vue {
           <li class='user'>
             <a-dropdown>
               <span class='ant-dropdown-link'>
-                <a-avatar src={this.c_userInfo ? this.c_userInfo : 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'} />
-                <span class='name'>{this.c_userInfo?.username ? this.c_userInfo.username : 'Yours'}</span>
+                <a-avatar
+                  src={
+                    this.c_userInfo
+                      ? this.c_userInfo
+                      : 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                  }
+                />
+                <span class='name'>
+                  {this.c_userInfo?.username ? this.c_userInfo.username : 'Yours'}
+                </span>
               </span>
               <a-menu slot='overlay' on-click={this.menuClick}>
                 <a-menu-item key='2'>修改密码</a-menu-item>
