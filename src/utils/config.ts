@@ -18,15 +18,17 @@ export const SidebarList: Array<SidebarOption> = [
       {
         key: '0-1',
         title: '当前发布',
-        routePath: '/user/login'
+        routePath: '/borrow/release'
       },
       {
         key: '0-2',
-        title: '当前借入'
+        title: '当前借入',
+        routePath: '/borrow/current'
       },
       {
         key: '0-3',
-        title: '历史借入'
+        title: '历史借入',
+        routePath: '/borrow/history'
       },
       {
         key: '0-4',
@@ -41,11 +43,13 @@ export const SidebarList: Array<SidebarOption> = [
     children: [
       {
         key: '1-0',
-        title: '历史借出'
+        title: '当前借出',
+        routePath: '/lend/current'
       },
       {
         key: '1-1',
-        title: '历史借入'
+        title: '历史借出',
+        routePath: '/lend/history'
       }
     ]
   },
@@ -67,7 +71,8 @@ export const SidebarList: Array<SidebarOption> = [
         title: '成交记录'
       }
     ]
-  }, {
+  },
+  {
     key: '3',
     title: '个人中心',
     icon: 'user',
@@ -83,7 +88,8 @@ export const SidebarList: Array<SidebarOption> = [
       {
         key: '3-2',
         title: '支付设置'
-      }, {
+      },
+      {
         key: '3-3',
         title: '迪富 U 盾'
       }
