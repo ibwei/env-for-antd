@@ -1,17 +1,17 @@
 <template>
-  <div class="login">
-    <div class="login-content">
-      <a-card size="small" style="width: 350px; padding: 0 30px;">
+  <userform-layout>
+    <template #form>
+      <div>
         <p class="title">欢迎登录迪富</p>
         <a-form :model="formLogin" :rules="rules" style="width: auto;" ref="formLogin">
           <a-form-item prop="account" class="login-form-item">
             <a-input v-model="formLogin.account" placeholder="请输入手机号/邮箱" class="item" :maxlength="255" :minlength="6"></a-input>
           </a-form-item>
           <a-form-item prop="password" class="login-form-item">
-            <a-input v-model="formLogin.password" :show-password="true" autocomplete="new-password" placeholder="登录密码" :maxlength="255" :minlength="6"></a-input>
+            <a-input v-model="formLogin.password" :show-password="true" autocomplete="new-password" placeholder="登录密码" :maxLength="255" :minLength="6"></a-input>
           </a-form-item>
           <a-form-item prop="isVerify" class="login-form-item">
-            <sliderValidation @handleSuccess="getVerify"></sliderValidation>
+            <slider-validation @handleSuccess="getVerify"></slider-validation>
           </a-form-item>
           <a-form-item class="login-form-item">
             <a-checkbox v-model="isRemenber">记住用户名</a-checkbox>
@@ -30,23 +30,25 @@
             </router-link>
           </a-form-item>
         </a-form>
-      </a-card>
-    </div>
-  </div>
+      </div>
+    </template>
+  </userform-layout>
 </template>
 
 <script>
 import SliderValidation from '@/views/components/SliderValidation.vue'
 import { isMobile, isEmail } from '@/utils/validate'
-import store from '@/store'
+import UserformLayout from '@/Layout/UserformLayout'
+import Store from '@/store'
 
 export default {
   name: 'Login',
   components: {
-    SliderValidation
+    SliderValidation,
+    UserformLayout
   },
   beforeRouteEnter(to, from, next) {
-    if (store.getters['user/isLogin']) {
+    if (Store.__s('user.login')) {
       next({ name: 'Home' })
     } else {
       next()
@@ -108,8 +110,7 @@ export default {
     userInfo: (vm) => vm.$store.__s('user.userInfo')
   },
   methods: {
-    // ...mapMutations('user', ['updateUserToken', 'updateUserInfo']),
-    handleSubmit: function () {
+    handleSubmit() {
       this.$refs.formLogin.validate((valid) => {
         if (valid) {
           this.loadingLogin = true
@@ -154,33 +155,21 @@ export default {
 </script>
 
 <style scoped lang="less">
-.login {
-  height: 100%;
-  padding: 90px 120px 0;
-  min-height: 100vh;
-  background: url('../../assets/login-bg.png') top center no-repeat;
-  .login-content {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-  }
-  .title {
-    font-size: 24px;
-    color: #333333;
-    margin: 30px 0;
-    text-align: center;
-  }
-  .login-form-item {
-    margin-bottom: 15px;
-  }
-  .login-btn {
-    width: 100%;
-  }
-  .link-btn {
-    margin-right: 36px;
-    font-size: 14px;
-    cursor: pointer;
-  }
+.title {
+  font-size: 24px;
+  color: #333333;
+  margin: 30px 0;
+  text-align: center;
+}
+.login-form-item {
+  margin-bottom: 15px;
+}
+.login-btn {
+  width: 100%;
+}
+.link-btn {
+  margin-right: 36px;
+  font-size: 14px;
+  cursor: pointer;
 }
 </style>

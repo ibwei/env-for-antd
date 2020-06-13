@@ -2,10 +2,10 @@ const serviceContext = require.context('./service', false, /\.js$/)
 
 const services = {}
 
-serviceContext.keys().forEach(service => {
+serviceContext.keys().forEach((service) => {
   const serviceModule = serviceContext(service).default
 
-  let serviceName = service.replace(/(\.\/|\.js)/g, '')
+  const serviceName = service.replace(/(\.\/|\.js)/g, '')
   services[serviceName] = serviceModule
 })
 

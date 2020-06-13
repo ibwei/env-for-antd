@@ -1,5 +1,5 @@
 export default {
   userInfo: null,
   token: '',
-  login: false
+  login: true
 }

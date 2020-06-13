@@ -1,4 +1,5 @@
-export const SidebarList = [
+import { SidebarOption } from '@/views/components/Sidebar/index'
+export const SidebarList: Array<SidebarOption> = [
   {
     key: '0',
     title: '资金借入',
@@ -6,7 +7,8 @@ export const SidebarList = [
     children: [
       {
         key: '0-1',
-        title: '当前发布'
+        title: '当前发布',
+        routePath: '/user/login'
       },
       {
         key: '0-2',
