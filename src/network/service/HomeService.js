@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 class HomeService extends Vue {
   getSliders(params) {
     return this.$post('findSlideshows', params)

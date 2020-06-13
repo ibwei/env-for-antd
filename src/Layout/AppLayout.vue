@@ -1,5 +1,5 @@
 <template>
-  <div style="border:1px solid red;">
+  <div class="main-app">
     <home-layout v-if="c_login" />
     <router-view v-else></router-view>
   </div>
@@ -17,4 +17,8 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.main-app {
+  min-height: 100vh;
+}
+</style>
