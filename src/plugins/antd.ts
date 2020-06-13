@@ -16,6 +16,9 @@ import {
   Input,
   Alert,
   Checkbox,
+  Card,
+  Popover,
+  Progress,
   Row,
   Col,
   Tag
@@ -49,4 +52,7 @@ Vue.use(Input)
 Vue.use(Input.Password)
 Vue.use(Alert)
 Vue.use(Checkbox)
+Vue.use(Card)
+Vue.use(Popover)
+Vue.use(Progress)
 Vue.use(Tag)

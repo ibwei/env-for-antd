@@ -1,18 +1,18 @@
+.ant-table-body {
+  overflow-x: hidden !important;
+}
 ::-webkit-scrollbar-thumb {
   background-color: #e6e6e6;
 }
 
 ::-webkit-scrollbar {
-  width : 8px;
+  width: 8px;
   height: 8px;
 }
-
 :root {
   --font-family-sans-serif: 'Nunito', sans-serif;
-  --font-family-monospace : SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
-
 @primary-color: #409eff;
 
 html {
@@ -20,10 +20,10 @@ html {
 }
 
 body {
-  height          : 100%;
-  overflow-y      : hidden;
+  height: 100%;
+  overflow-y: hidden;
   background-color: #f0f2f5 !important;
-  font-family     : Nunito, sans-serif;
+  font-family: Nunito, sans-serif;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -31,7 +31,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width : 8px;
+  width: 8px;
   height: 8px;
 }
 
@@ -41,55 +41,55 @@ body {
   }
 
   .ant-breadcrumb {
-    &>span {
+    & > span {
       &:last-child {
-        color      : #999;
+        color: #999;
         font-weight: normal;
       }
     }
   }
 
   .ant-breadcrumb-link {
-    .anticon+span {
+    .anticon + span {
       margin-left: 4px;
     }
   }
 
   .ant-table {
-    .ant-table-thead>tr>th {
+    .ant-table-thead > tr > th {
       text-align: center;
     }
 
-    .ant-table-tbody>tr>td {
+    .ant-table-tbody > tr > td {
       text-align: center;
     }
 
     &.ant-table-small {
-      .ant-table-thead>tr>th {
+      .ant-table-thead > tr > th {
         background: #f7f7f7;
       }
 
-      .ant-table-body>table {
+      .ant-table-body > table {
         padding: 0;
       }
     }
   }
 
   .ant-table-pagination {
-    float  : none !important;
+    float: none !important;
     display: table;
-    margin : 16px auto !important;
+    margin: 16px auto !important;
   }
 
   .ant-popover-inner {
-    border       : none;
+    border: none;
     border-radius: 0;
-    box-shadow   : 0 0 20px rgba(100, 100, 100, 0.2);
+    box-shadow: 0 0 20px rgba(100, 100, 100, 0.2);
   }
 
   .vertical-center-modal {
-    display        : flex;
-    align-items    : center;
+    display: flex;
+    align-items: center;
     justify-content: center;
 
     .ant-modal {
@@ -126,7 +126,6 @@ body {
     text-decoration: none;
   }
 }
-
 @media (min-width: 1600px) {
   :global {
     .ant-col-xl-48 {
@@ -138,10 +137,8 @@ body {
     }
   }
 }
-
 @media (max-width: 767px) {
   :global {
-
     .ant-pagination-item,
     .ant-pagination-next,
     .ant-pagination-options,
@@ -162,212 +159,173 @@ body {
 }
 
 .chartjs-chart {
-  margin  : auto;
+  margin: auto;
   position: relative;
-  width   : 100%;
+  width: 100%;
 }
 
 @font-face {
-  font-family: 'iconfont';
-  /* project id 730427 */
-  src        : url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.eot');
-  src        : url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.woff') format('woff'),
-    url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.svg#iconfont') format('svg');
+  font-family: 'iconfont'; /* project id 730427 */
+  src: url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.eot');
+  src: url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.woff') format('woff'), url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.ttf') format('truetype'), url('//at.alicdn.com/t/font_730427_0jr8nzjd50j6.svg#iconfont') format('svg');
 }
 
 [class*=' iconfont-'],
 [class^='iconfont-'] {
-  font-family            : iconfont !important;
-  font-size              : 18px;
-  speak                  : none;
-  font-style             : normal;
-  font-weight            : 400;
-  font-variant           : normal;
-  text-transform         : none;
-  vertical-align         : baseline;
-  display                : inline-block;
-  -webkit-font-smoothing : antialiased;
+  font-family: iconfont !important;
+  font-size: 18px;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 12px 8px;
+}
+
+.ant-table-tbody {
+  background-color: #fff;
 }
 
 .iconfont-user::before {
   content: '\e7ae';
 }
-
 .iconfont-lock::before {
   content: '\e7c9';
 }
-
 .iconfont-code::before {
   content: '\e7fc';
 }
-
 .iconfont-indent::before {
   content: '\e7f3';
 }
-
 .iconfont-outdent::before {
   content: '\e7f4';
 }
-
 .iconfont-email::before {
   content: '\e7de';
 }
-
 .iconfont-crown::before {
   content: '\e842';
 }
-
 .iconfont-tag::before {
   content: '\e7e4';
 }
-
 .iconfont-sound::before {
   content: '\e7db';
 }
-
 .iconfont-cloudDownload::before {
   content: '\e7da';
 }
-
 .iconfont-cloudUpload::before {
   content: '\e7d9';
 }
-
 .iconfont-car::before {
   content: '\e7d7';
 }
-
 .iconfont-unlike::before {
   content: '\e7ca';
 }
-
 .iconfont-like::before {
   content: '\e7c8';
 }
-
 .iconfont-filter::before {
   content: '\e7c7';
 }
-
 .iconfont-skin::before {
   content: '\e7c6';
 }
-
 .iconfont-bell::before {
   content: '\e7c5';
 }
-
 .iconfont-delete::before {
   content: '\e7c4';
 }
-
 .iconfont-alert::before {
   content: '\e7c3';
 }
-
 .iconfont-fileSearch::before {
   content: '\e7b4';
 }
-
 .iconfont-mobile::before {
   content: '\e7b2';
 }
-
 .iconfont-import::before {
   content: '\e794';
 }
-
 .iconfont-save::before {
   content: '\e793';
 }
-
 .iconfont-export::before {
   content: '\e792';
 }
-
 .iconfont-edit::before {
   content: '\e791';
 }
-
 .iconfont-location::before {
   content: '\e790';
 }
-
 .iconfont-setting::before {
   content: '\e78f';
 }
-
 .iconfont-chart::before {
   content: '\e78e';
 }
-
 .iconfont-dashboard::before {
   content: '\e78b';
 }
-
 .iconfont-message::before {
   content: '\e78a';
 }
-
 .iconfont-server::before {
   content: '\e7b1';
 }
-
 .iconfont-team::before {
   content: '\e7af';
 }
-
 .iconfont-listMenu::before {
   content: '\e7f5';
 }
-
 .iconfont-down::before {
   content: '\e7ee';
 }
-
 .iconfont-up::before {
   content: '\e7ed';
 }
-
 .iconfont-time-circle::before {
   content: '\e784';
 }
-
 .iconfont-unlock::before {
   content: '\e7cb';
 }
-
 .iconfont-wifi::before {
   content: '\e7e0';
 }
-
 .iconfont-direction::before {
   content: '\e609';
 }
-
 .iconfont-speed::before {
   content: '\e8db';
 }
-
 .iconfont-close::before {
   content: '\e800';
 }
-
 .iconfont-monitor::before {
   content: '\e670';
 }
-
 .iconfont-link::before {
   content: '\e7e2';
 }
-
 .iconfont-plus::before {
   content: '\e801';
 }
-
 .link-gray {
   color: rgba(0, 0, 0, 0.3);
 }

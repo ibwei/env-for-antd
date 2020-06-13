@@ -1,4 +1,5 @@
 export default {
   userInfo: null,
-  token: ''
+  token: '',
+  login: false
 }

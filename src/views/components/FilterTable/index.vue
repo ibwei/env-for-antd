@@ -43,6 +43,7 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable */
 import { Prop, Emit, Vue, Component } from 'vue-property-decorator'
 import { FilterFormList, tableList, Opreat } from '@/interface/index'
 import MFilter from './MFilter'
@@ -116,12 +117,12 @@ export default class FilterTable extends Vue {
 
   @Prop({ default: null }) private scroll!: { x: number; y: number }
 
-  @Prop({ default: (record: any) => null }) private expandedRowRender!: (record) => void
+  @Prop({ default: (record: any) => null }) private expandedRowRender!: (record: any) => void
 
   // 初始化请求参数
   tableParams: any = Object.assign(this.filterParams, this.outParams)
 
-  defalutTableList: tableList[] = this.tableList.filter(() => true)
+  defalutTableList: tableList[] = this.tableList.filter((item) => true)
 
   changeTableList: tableList[]
 
@@ -131,11 +132,11 @@ export default class FilterTable extends Vue {
     if (saveList) {
       const checkList = saveList.split(',')
       const filterList = this.defalutTableList.filter(
-        (item) => checkList.indexOf(item.dataIndex) > -1
+        (item, index) => checkList.indexOf(item.dataIndex) > -1
       )
       this.changeTableList = filterList
     } else {
-      this.changeTableList = this.tableList.filter(() => true)
+      this.changeTableList = this.tableList.filter((item) => true)
     }
   }
 
@@ -181,7 +182,9 @@ export default class FilterTable extends Vue {
   @Emit()
   @Emit()
   setTable(list: Array<string>) {
-    const filterList = this.defalutTableList.filter((item) => list.indexOf(item.dataIndex) > -1)
+    const filterList = this.defalutTableList.filter(
+      (item, index) => list.indexOf(item.dataIndex) > -1
+    )
     this.changeTableList = filterList
   }
 
@@ -204,6 +207,7 @@ export default class FilterTable extends Vue {
 
 <style lang="less" scoped>
 .filter-table {
+  box-sizing: border-box;
   overflow: hidden;
   min-height: e('calc(100vh - 100px)');
 }
