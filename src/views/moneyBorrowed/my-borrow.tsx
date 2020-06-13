@@ -3,6 +3,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Tag, Modal, Button, Table, Avatar, Rate, Badge } from 'ant-design-vue'
 import { tableList, FilterFormList, Opreat } from '@/interface'
+import MTable from '@/views/components/FilterTable/MTable'
 
 @Component({
   name: 'comment',
@@ -13,7 +14,8 @@ import { tableList, FilterFormList, Opreat } from '@/interface'
     'a-table': Table,
     'a-avatar': Avatar,
     'a-rate': Rate,
-    'a-badge': Badge
+    'a-badge': Badge,
+    'm-table': MTable
   }
 })
 export default class Comment extends Vue {
@@ -30,52 +32,52 @@ export default class Comment extends Vue {
   tableList: tableList[] = [
     {
       title: '单号',
-      dataIndex: 'id',
+      dataIndex: 'tallaNo',
       align: 'center'
     },
     {
       title: '创建时间',
-      dataIndex: 'name',
+      dataIndex: 'createTime',
       align: 'center'
     },
     {
       title: '质押量',
-      dataIndex: '',
+      dataIndex: 'pawnQuantity',
       align: 'center'
     },
     {
       title: '币种',
-      dataIndex: '',
+      dataIndex: 'pawnCoinEunit',
       align: 'center'
     },
     {
       title: '质押率',
-      dataIndex: '',
+      dataIndex: 'pawnRate',
       align: 'center'
     },
     {
       title: '日利率',
-      dataIndex: '',
+      dataIndex: 'legalDailyRate',
       align: 'center'
     },
     {
       title: '参考年化',
-      dataIndex: '',
+      dataIndex: 'legalDailyRate',
       align: 'center'
     },
     {
       title: '借入金额',
-      dataIndex: '',
+      dataIndex: 'legalQuantity',
       align: 'center'
     },
     {
       title: '期限',
-      dataIndex: '',
+      dataIndex: 'cycle',
       align: 'center'
     },
     {
       title: '意向金额',
-      dataIndex: 'a_answer',
+      dataIndex: 'legalLockQuantity',
       align: 'center'
     }
   ]
@@ -88,17 +90,8 @@ export default class Comment extends Vue {
       text: '撤销',
       roles: false,
       popconfirm: true,
-      msg: '确定禁用改账户吗？'
+      msg: '确定撤销吗？'
     }
-    // {
-    //   key: 'delete',
-    //   rowKey: 'id',
-    //   color: 'black',
-    //   text: '删除',
-    //   roles: true,
-    //   popconfirm: true,
-    //   msg: '是否删除该用户?'
-    // }
   ]
 
   title = '新增图片'
@@ -165,27 +158,26 @@ export default class Comment extends Vue {
 
   render() {
     return (
-      <div class="baseInfo-wrap">
-        <filter-table
-          ref="baseInfoTable"
-          tableList={this.tableList}
-          filterList={[]}
-          filterGrade={[]}
-          scroll={{ x: 900 }}
+      <div class='baseInfo-wrap'>
+        <m-table
+          ref='MTable'
+          table-list={this.tableList}
           url={'http://edu.ibwei.com/api/test/part/list'}
-          filterParams={{}}
-          outParams={this.outParams}
-          addBtn={false}
-          localName={'userList'}
-          exportBtn={false}
-          opreatWidth={'120px'}
-          dataType={'json'}
-          rowKey={'id'}
+          data-type={'json'}
+          row-key={'id'}
           opreat={this.opreat}
-          fetchType={'get'}
-          backParams={this.BackParams}
-          on-menuClick={this.tableClick}
-          on-add={this.add}
+          out-params={this.outParams}
+          opreat-width={'120px'}
+          back-params={this.BackParams}
+          local-name={'userList'}
+          fetch-type={'get'}
+          // default-page-size="defaultPageSize"
+          // highlight-current-row="highlightCurrentRow"
+          scroll={{ x: 900 }}
+          // expanded-row-render="expandedRowRender"
+          tableClick={this.tableClick}
+          // selectChange="selectChange"
+          // currentChange="currentChange"
         />
       </div>
     )

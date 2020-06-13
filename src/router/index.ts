@@ -19,7 +19,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/my-borrow',
     name: 'my-borrow',
-    component: () => import('@/views/my-borrow.tsx')
+    component: () => import('@/views/moneyBorrowed/my-borrow')
   },
   ...modules,
   {
