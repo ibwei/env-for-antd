@@ -36,11 +36,11 @@ export default class MTable extends Vue {
     })
   })
   private backParams!: {
-    code: string;
-    message: string;
-    data: string;
-    codeOK: string | number;
-    total: string;
+    code: string
+    message: string
+    data: string
+    codeOK: string | number
+    total: string
   }
 
   // 外部参数
@@ -80,9 +80,9 @@ export default class MTable extends Vue {
   // data
   tableData: any = []
   pageParams: {
-    pageSize: number;
-    pageNum: number;
-    page: boolean;
+    pageSize: number
+    pageNum: number
+    page: boolean
   } = {
     pageSize: this.defaultPageSize,
     pageNum: 1,
@@ -113,14 +113,20 @@ export default class MTable extends Vue {
         url: this.url,
         method: this.fetchType,
         responseType: this.dataType,
-        data: Object.assign(this.tableParams ? this.tableParams : {}, this.pageParams, this.outParams)
+        data: Object.assign(
+          this.tableParams ? this.tableParams : {},
+          this.pageParams,
+          this.outParams
+        )
       })
       .then((res: any) => {
         this.loading = false
         const code = this.getValue(this.backParams.code, res)
         if (code === this.backParams.codeOK) {
           this.tableData = this.getValue(this.backParams.data, res)
-          this.dataTotal = this.getValue(this.backParams.total, res) ? this.getValue(this.backParams.total, res) : 0
+          this.dataTotal = this.getValue(this.backParams.total, res)
+            ? this.getValue(this.backParams.total, res)
+            : 0
         } else {
           this.$message.error(this.getValue(this.backParams.message, res))
         }
@@ -210,7 +216,11 @@ export default class MTable extends Vue {
           </a-button>
           <a-menu slot="overlay">
             {this.opreat.map((item, indexs) => (
-              <a-menu-item key={indexs} command={item.key} disabled={item.disabled && item.disabled(record)}>
+              <a-menu-item
+                key={indexs}
+                command={item.key}
+                disabled={item.disabled && item.disabled(record)}
+              >
                 {typeof item.text === 'function' ? item.text(record) : item.text}
               </a-menu-item>
             ))}
@@ -225,8 +235,17 @@ export default class MTable extends Vue {
           const whiteList = ['red', 'orange']
           if (item.popconfirm) {
             return (
-              <a-popconfirm on-confirm={() => this.menuClick(item.key, record)} title={typeof item.msg === 'function' ? item.msg(record) : item.msg}>
-                <a id={`${item.key}-${record[item.rowKey]}`} key={indexs} class={`link-${typeof item.color === 'function' ? item.color(record) : item.color}`}>
+              <a-popconfirm
+                on-confirm={() => this.menuClick(item.key, record)}
+                title={typeof item.msg === 'function' ? item.msg(record) : item.msg}
+              >
+                <a
+                  id={`${item.key}-${record[item.rowKey]}`}
+                  key={indexs}
+                  class={`link-${
+                    typeof item.color === 'function' ? item.color(record) : item.color
+                  }`}
+                >
                   {typeof item.text === 'function' ? item.text(record) : item.text}
                 </a>
               </a-popconfirm>
@@ -239,17 +258,34 @@ export default class MTable extends Vue {
               </a>
             )
           }
-          if (whiteList.indexOf(typeof item.color === 'function' ? item.color(record) : item.color) >= 0) {
+          if (
+            whiteList.indexOf(typeof item.color === 'function' ? item.color(record) : item.color) >=
+            0
+          ) {
             return (
-              <a-popconfirm on-confirm={() => this.menuClick(item.key, record)} title={typeof item.msg === 'function' ? item.msg(record) : item.msg}>
-                <a id={`${item.key}-${record[item.rowKey]}`} key={indexs} class={`link-${typeof item.color === 'function' ? item.color(record) : item.color}`}>
+              <a-popconfirm
+                on-confirm={() => this.menuClick(item.key, record)}
+                title={typeof item.msg === 'function' ? item.msg(record) : item.msg}
+              >
+                <a
+                  id={`${item.key}-${record[item.rowKey]}`}
+                  key={indexs}
+                  class={`link-${
+                    typeof item.color === 'function' ? item.color(record) : item.color
+                  }`}
+                >
                   {typeof item.text === 'function' ? item.text(record) : item.text}
                 </a>
               </a-popconfirm>
             )
           }
           return (
-            <a id={`${item.key}-${record[item.rowKey]}`} class={`link-${typeof item.color === 'function' ? item.color(record) : item.color}`} key={indexs} on-click={() => this.menuClick(item.key, record)}>
+            <a
+              id={`${item.key}-${record[item.rowKey]}`}
+              class={`link-${typeof item.color === 'function' ? item.color(record) : item.color}`}
+              key={indexs}
+              on-click={() => this.menuClick(item.key, record)}
+            >
               {typeof item.text === 'function' ? item.text(record) : item.text}
             </a>
           )

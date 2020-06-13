@@ -1,5 +1,25 @@
 import Vue from 'vue'
-import { DatePicker, Button, message, Rate, Icon, ConfigProvider, Select, Result, Layout, Menu, Form, Tabs, Table, Input, Alert, Checkbox, Row, Col, Tag } from 'ant-design-vue'
+import {
+  DatePicker,
+  Button,
+  message,
+  Rate,
+  Icon,
+  ConfigProvider,
+  Select,
+  Result,
+  Layout,
+  Menu,
+  Form,
+  Tabs,
+  Table,
+  Input,
+  Alert,
+  Checkbox,
+  Row,
+  Col,
+  Tag
+} from 'ant-design-vue'
 import '../styles/index.less'
 
 Vue.prototype.$message = message
