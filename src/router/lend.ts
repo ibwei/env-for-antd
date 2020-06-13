@@ -21,6 +21,6 @@ const history = {
 export default {
   path: '/' + __DIR__,
   redirect: '/' + __DIR__ + '/release',
-  component: () => import('../views/' + __DIR__ + '/index.vue'),
+  component: () => import('../views/' + __DIR__ + '/index.tsx'),
   children: [Current, history]
 }
