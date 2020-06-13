@@ -6,7 +6,7 @@ import { tableList, FilterFormList, Opreat } from '@/interface'
 import MTable from '@/views/components/FilterTable/MTable'
 
 @Component({
-  name: 'comment',
+  name: 'release',
   components: {
     'a-tag': Tag,
     'a-modal': Modal,
@@ -18,7 +18,7 @@ import MTable from '@/views/components/FilterTable/MTable'
     'm-table': MTable
   }
 })
-export default class Comment extends Vue {
+export default class Release extends Vue {
   BackParams: any = {
     code: 'data.resultCode',
     codeOK: 0,
