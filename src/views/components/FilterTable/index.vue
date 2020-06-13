@@ -1,7 +1,44 @@
 <template>
   <div class="filter-table">
-    <m-filter ref="MFilter" :filter-list="filterList" :filter-grade="filterGrade" :filter-params="filterParams" :table-list="defalutTableList" :add-btn="addBtn" :add-title="addTitle" :export-btn="exportBtn" :local-name="localName" @search="searchFun" @export="exportBack" @clearOut="clearFun" @setTable="setTable" @addFun="addBack" @tableHeight="tableHeight" />
-    <m-table ref="MTable" :table-list="changeTableList" :url="url" :data-type="dataType" :row-key="rowKey" :opreat="opreat" :out-params="outParams" :opreat-width="opreatWidth" :back-params="backParams" :local-name="localName" :fetch-type="fetchType" :fetch-error="fetchError" :table-params="tableParams" :default-page-size="defaultPageSize" :highlight-current-row="highlightCurrentRow" :scroll="scroll" :expanded-row-render="expandedRowRender" @tableClick="tableClick" @selectChange="selectChange" @currentChange="currentChange" />
+    <m-filter
+      ref="MFilter"
+      :filter-list="filterList"
+      :filter-grade="filterGrade"
+      :filter-params="filterParams"
+      :table-list="defalutTableList"
+      :add-btn="addBtn"
+      :add-title="addTitle"
+      :export-btn="exportBtn"
+      :local-name="localName"
+      @search="searchFun"
+      @export="exportBack"
+      @clearOut="clearFun"
+      @setTable="setTable"
+      @addFun="addBack"
+      @tableHeight="tableHeight"
+    />
+    <m-table
+      ref="MTable"
+      :table-list="changeTableList"
+      :url="url"
+      :data-type="dataType"
+      :row-key="rowKey"
+      :opreat="opreat"
+      :out-params="outParams"
+      :opreat-width="opreatWidth"
+      :back-params="backParams"
+      :local-name="localName"
+      :fetch-type="fetchType"
+      :fetch-error="fetchError"
+      :table-params="tableParams"
+      :default-page-size="defaultPageSize"
+      :highlight-current-row="highlightCurrentRow"
+      :scroll="scroll"
+      :expanded-row-render="expandedRowRender"
+      @tableClick="tableClick"
+      @selectChange="selectChange"
+      @currentChange="currentChange"
+    />
   </div>
 </template>
 
@@ -94,7 +131,9 @@ export default class FilterTable extends Vue {
     const saveList = window.localStorage.getItem(this.localName)
     if (saveList) {
       const checkList = saveList.split(',')
-      const filterList = this.defalutTableList.filter((item, index) => checkList.indexOf(item.dataIndex) > -1)
+      const filterList = this.defalutTableList.filter(
+        (item, index) => checkList.indexOf(item.dataIndex) > -1
+      )
       this.changeTableList = filterList
     } else {
       this.changeTableList = this.tableList.filter((item) => true)
@@ -143,7 +182,9 @@ export default class FilterTable extends Vue {
   @Emit()
   @Emit()
   setTable(list: Array<string>) {
-    const filterList = this.defalutTableList.filter((item, index) => list.indexOf(item.dataIndex) > -1)
+    const filterList = this.defalutTableList.filter(
+      (item, index) => list.indexOf(item.dataIndex) > -1
+    )
     this.changeTableList = filterList
   }
 
