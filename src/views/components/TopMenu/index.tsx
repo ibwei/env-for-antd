@@ -40,15 +40,12 @@ export default class Spin extends Vue {
 
   @Emit()
   menuClick(params: { item: any; key: string; keyPath: string[] }): void {
+    console.log(params.key)
     switch (params.key) {
+      case '0':
+        break
       case '1':
-        break
-      case '2':
-        this.$router.push('/user/update')
-        break
-      case '3':
-        // 退出
-
+        this.$router.push('/user/login')
         break
       default:
     }
@@ -113,9 +110,9 @@ export default class Spin extends Vue {
                 </span>
               </span>
               <a-menu slot='overlay' on-click={this.menuClick}>
-                <a-menu-item key='2'>修改密码</a-menu-item>
+                <a-menu-item key='0'>修改密码</a-menu-item>
                 <a-menu-divider />
-                <a-menu-item key='3'>
+                <a-menu-item key='1' on-click={this.menuClick}>
                   <font color='red'>退出登录</font>
                 </a-menu-item>
               </a-menu>

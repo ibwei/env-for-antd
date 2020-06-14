@@ -1,3 +1,3 @@
 // plugins export
 import './antd'
-import './registerComponent'
+import './register'

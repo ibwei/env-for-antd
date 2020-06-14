@@ -32,7 +32,7 @@ let loggingOut = false // 退出锁
 // 请求拦截器
 service.interceptors.request.use(
   // 请求拦截器
-  config => {
+  (config) => {
     if (config.method == 'GET' || config.method == 'get') {
       config.headers = {}
     }
@@ -58,7 +58,7 @@ service.interceptors.request.use(
           .then(() => {
             return customizedRequest(config)
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err)
           })
       }
@@ -66,14 +66,14 @@ service.interceptors.request.use(
       return customizedRequest(config)
     }
   },
-  function(err) {
+  function (err) {
     return Promise.reject(err)
   }
 )
 
 // 返回拦截器
 service.interceptors.response.use(
-  function(response) {
+  function (response) {
     // 如果匹配到特殊到URL，则直接返回数据，不做处理
     for (let i = 0; i < EspecialURL.length; i++) {
       if (response.config.url.indexOf(EspecialURL[i]) != -1) return response
@@ -99,7 +99,7 @@ service.interceptors.response.use(
         return response.data
     }
   },
-  function(error) {
+  function (error) {
     if (error.response) {
       vm.$message({
         message: `${error.response.status}:${error.response.statusText}`,
@@ -118,7 +118,7 @@ service.interceptors.response.use(
 )
 
 // 根据状态码返回对应到状态
-const classifyCode = code => {
+const classifyCode = (code) => {
   /*
     @response.data.code:200,success。
     @response.data.code:500等三位数code为通用错误代码，不涉及业务操作。
@@ -138,7 +138,7 @@ const classifyCode = code => {
 }
 
 // 错误处理
-const handleCommonError = response => {
+const handleCommonError = (response) => {
   switch (response.data.code) {
     case 501: // 账户被冻结
       vm.$message({
@@ -150,37 +150,37 @@ const handleCommonError = response => {
     case 510: // 需要谷歌验证码
       return vm
         .$googleVerify(response)
-        .then(data => {
+        .then((data) => {
           return data
         })
-        .catch(err => {
+        .catch((err) => {
           return Promise.reject(err)
         })
     case 520: // 需要手机验证码
       return vm
         .$accountNumberVerify(response)
-        .then(data => {
+        .then((data) => {
           return data
         })
-        .catch(err => {
+        .catch((err) => {
           return Promise.reject(err)
         })
     case 530: // 需要资金安全码
       return vm
         .$assetVerify(response)
-        .then(data => {
+        .then((data) => {
           return data
         })
-        .catch(err => {
+        .catch((err) => {
           return Promise.reject(err)
         })
     case 540: // 需要邮箱验证码
       return vm
         .$accountNumberVerify(response)
-        .then(data => {
+        .then((data) => {
           return data
         })
-        .catch(err => {
+        .catch((err) => {
           return Promise.reject(err)
         })
     default:
@@ -193,7 +193,7 @@ const handleCommonError = response => {
 }
 
 // 错误处理
-const handleTokenError = response => {
+const handleTokenError = (response) => {
   switch (response.data.code) {
     case 600: // 登录失败或未登录
     case 601: // 用户token不正确
@@ -209,21 +209,21 @@ const handleTokenError = response => {
           .then(() => {
             return reRequest(response.config)
           })
-          .catch(err => {
+          .catch((err) => {
             return Promise.reject(err)
           })
       } else {
         refresh = updateToken()
           .then(() => {
             return reRequest(response.config)
-              .then(data => {
+              .then((data) => {
                 return data
               })
-              .catch(err => {
+              .catch((err) => {
                 return Promise.reject(err)
               })
           })
-          .catch(err => {
+          .catch((err) => {
             console.log('logout')
             return Promise.reject(err)
           })
@@ -247,7 +247,7 @@ const logout = () => {
       type: 'warning'
     })
     router.replace({
-      name: 'Login',
+      name: 'login',
       query: {
         uri: window.location.href
       }
@@ -266,7 +266,7 @@ const updateToken = () => {
         refreshToken: store.state.user.userToken.refresh_token,
         userId: store.state.user.userToken.userId
       })
-      .then(res => {
+      .then((res) => {
         if (res) {
           store.commit('user/updateUserToken', res.data)
           tokenLock = false
@@ -276,7 +276,7 @@ const updateToken = () => {
           reject(res)
         }
       })
-      .catch(error => {
+      .catch((error) => {
         logout()
         reject(error)
       })
@@ -284,20 +284,20 @@ const updateToken = () => {
 }
 
 // 重新请求
-const reRequest = config => {
+const reRequest = (config) => {
   return new Promise((resolve, reject) => {
     service(config)
-      .then(res => {
+      .then((res) => {
         resolve(res)
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err)
       })
   })
 }
 
 // 定制请求的config
-const customizedRequest = config => {
+const customizedRequest = (config) => {
   let api = Apis[config.url]
   let cipherFlag = true
 
@@ -310,9 +310,7 @@ const customizedRequest = config => {
       config.url = `${api.path}`
     } else if (api.proxy) {
       // 其他特殊标示的接口
-      config.baseURL = api.test
-        ? 'http://192.168.31.128:8082'
-        : 'http://192.168.31.218:8082'
+      config.baseURL = api.test ? 'http://192.168.31.128:8082' : 'http://192.168.31.218:8082'
       config.url = api.path
     } else if (api.proxyURL) {
       config.baseURL = api.proxyURL
@@ -387,7 +385,7 @@ const encryptionData = (config, verifyCode, verifyType) => {
   return config
 }
 
-const encryptionOnly = config => {
+const encryptionOnly = (config) => {
   let key = config.method.toUpperCase() === 'POST' ? 'data' : 'params'
   try {
     let data = config[key]
@@ -402,7 +400,7 @@ const encryptionOnly = config => {
   return config
 }
 
-const numberToString = config => {
+const numberToString = (config) => {
   let key = config.method.toUpperCase() === 'POST' ? 'data' : 'params'
   try {
     let data = config[key]
@@ -426,7 +424,7 @@ const numberToString = config => {
  *
  * @param {*} response 当前请求信息
  */
-Vue.prototype.$accountNumberVerify = function(response) {
+Vue.prototype.$accountNumberVerify = function (response) {
   try {
     !window.$MSG_BOX && (window.$MSG_BOX = vm.$msgbox)
   } catch (error) {
@@ -461,7 +459,7 @@ Vue.prototype.$accountNumberVerify = function(response) {
   return new Promise((resolve, reject) => {
     this.$msgbox({
       title: '验证提示',
-      message: h('VerifyModal', {
+      content: h('VerifyModal', {
         props: {
           mode: mode,
           number: mobile,
@@ -475,12 +473,12 @@ Vue.prototype.$accountNumberVerify = function(response) {
       cancelButtonText: '取消',
       beforeClose: (action, instance, done) => {
         /*找到手机验证实例 */
-        let formInstance = find(instance.$children, item => {
+        let formInstance = find(instance.$children, (item) => {
           return item.$ownComponentName == 'VerifyModal'
         })
         if (action === 'confirm') {
           /*表单验证 */
-          formInstance.$refs['VerifyModalForm'].validate(valid => {
+          formInstance.$refs['VerifyModalForm'].validate((valid) => {
             if (!valid) return
             /*傻逼操作--登录不需要加密 */
             let newConfig = {}
@@ -501,10 +499,10 @@ Vue.prototype.$accountNumberVerify = function(response) {
             }
             console.log(newConfig)
             reRequest(newConfig)
-              .then(res => {
+              .then((res) => {
                 resolve(res)
               })
-              .catch(err => {
+              .catch((err) => {
                 reject(err)
               })
             formInstance.formData.code = ''
@@ -525,7 +523,7 @@ Vue.prototype.$accountNumberVerify = function(response) {
  *
  * @param {*} response 当前请求信息
  */
-Vue.prototype.$googleVerify = function(response) {
+Vue.prototype.$googleVerify = function (response) {
   try {
     !window.$MSG_BOX && (window.$MSG_BOX = vm.$msgbox)
   } catch (error) {
@@ -542,10 +540,10 @@ Vue.prototype.$googleVerify = function(response) {
       .then(({ value }) => {
         let newConfig = encryptionData(response.config, value, 510)
         reRequest(newConfig)
-          .then(res => {
+          .then((res) => {
             resolve(res)
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err)
           })
       })
@@ -560,7 +558,7 @@ Vue.prototype.$googleVerify = function(response) {
  *
  * @param {*} response 当前请求信息
  */
-Vue.prototype.$assetVerify = function(response) {
+Vue.prototype.$assetVerify = function (response) {
   try {
     !window.$MSG_BOX && (window.$MSG_BOX = vm.$msgbox)
   } catch (error) {
@@ -578,11 +576,11 @@ Vue.prototype.$assetVerify = function(response) {
       .then(({ value }) => {
         let newConfig = encryptionData(response.config, value, 530)
         reRequest(newConfig)
-          .then(res => {
+          .then((res) => {
             console.log(res)
             resolve(res)
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err)
           })
       })
@@ -597,7 +595,7 @@ Vue.prototype.$assetVerify = function(response) {
  *
  * @param {*} $router 路由对象
  */
-Vue.prototype.$twoVerify = function($router) {
+Vue.prototype.$twoVerify = function ($router) {
   try {
     !window.$MSG_BOX && (window.$MSG_BOX = vm.$msgbox)
   } catch (error) {
@@ -623,21 +621,21 @@ Vue.prototype.$twoVerify = function($router) {
         done()
       }
     })
-      .then(action => {
+      .then((action) => {
         console.log(action)
         resolve('wancheng')
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err)
         reject('quxiao')
       })
   })
 }
 
-Vue.prototype.$get = function(url, params) {
+Vue.prototype.$get = function (url, params) {
   return service.get(url, params)
 }
-Vue.prototype.$post = function(url, params) {
+Vue.prototype.$post = function (url, params) {
   return service.post(url, params)
 }
 

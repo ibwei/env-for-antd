@@ -1,4 +1,15 @@
 import { LanguageOption, SidebarOption } from '@/interface'
+
+const config = {
+  name: '迪富借贷平台',
+  footerText: `迪富借贷平台  ${new Date().getFullYear()} © 版权所有`,
+  icon: '/favicon.ico',
+  // 全屏页面
+  fullPages: ['/user/login', '/404', '/401']
+}
+
+export const ColorArray = ['pink', 'red', 'orange', 'cyan', 'green', 'blue', 'purple', 'geekblue', 'magenta', 'volcano', 'gold', 'lime']
+
 export const LanguageList: Array<LanguageOption> = [
   {
     name: '中文简体',
@@ -96,3 +107,5 @@ export const SidebarList: Array<SidebarOption> = [
     ]
   }
 ]
+
+export default config

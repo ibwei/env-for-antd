@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Vue from 'vue'
 import {
   DatePicker,
@@ -25,12 +26,10 @@ import {
   Dropdown,
   Badge,
   Avatar,
-  FormModel
+  FormModel,
+  Modal
 } from 'ant-design-vue'
 import '../styles/index.less'
-
-Vue.prototype.$message = message
-window.message = message
 
 Vue.use(FormModel)
 Vue.use(FormModel.Item)
@@ -67,3 +66,11 @@ Vue.use(Card)
 Vue.use(Popover)
 Vue.use(Progress)
 Vue.use(Tag)
+Vue.use(Modal)
+
+Vue.prototype.$message = message
+
+Vue.prototype.$confirm = Modal.confirm
+Vue.prototype.$prompt = Modal.confirm
+Vue.prototype.$msgbox = Modal.info
+Vue.prototype.$alert = Modal.warning

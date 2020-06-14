@@ -55,6 +55,7 @@ import SliderValidation from '@/views/components/SliderValidation.vue'
 import { isMobile, isEmail } from '@/utils/validate'
 import UserformLayout from '@/Layout/UserformLayout'
 import Store from '@/store'
+import { message } from 'ant-design-vue'
 
 export default {
   name: 'Login',
@@ -131,7 +132,7 @@ export default {
           this.loadingLogin = true
           this.login()
         } else {
-          this.$message.warning('请按照提示输入')
+          message.warning('请按照提示输入')
         }
       })
     },
@@ -154,7 +155,7 @@ export default {
           if (uri) {
             window.location.href = uri
           } else {
-            window.location.replace('/')
+            this.$router.push('/')
           }
         }
       } catch (error) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="user-layout">
     <div class="login-content">
       <a-card size="small" :style="cardStyle">
         <slot name="form"></slot>
@@ -30,12 +30,13 @@ export default {
 </script>
 
 <style scoped lang="less">
-.login {
+.user-layout {
   height: 100%;
   padding: 0px;
   margin: 0;
   min-height: 100vh;
-  background: url('../assets/login-bg.png') top center no-repeat;
+  background: url('../assets/login-bg.png') top center no-repeat,
+    linear-gradient(180deg, #040a13, #09111b);
   .login-content {
     display: flex;
     flex-flow: column nowrap;
