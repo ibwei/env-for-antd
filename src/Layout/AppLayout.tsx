@@ -11,6 +11,8 @@ import './AppLayout.less'
 })
 export default class AppLayout extends Vue {
   render() {
+    console.log(config.fullPages.indexOf(this.$route.path) !== -1)
+    console.log(this.$route.path)
     if (config.fullPages.indexOf(this.$route.path) > -1) {
       return (
         <div class='app-full'>

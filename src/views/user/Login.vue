@@ -122,6 +122,9 @@ export default {
       this.formLogin.account = account
     }
   },
+  mounted() {
+    this.$store.__s('spinning', false)
+  },
   computed: {
     userInfo: (vm) => vm.$store.__s('user.userInfo')
   },
@@ -147,15 +150,16 @@ export default {
           this.$store.__s('remenberList', this.formLogin)
         }
         if (res && res.data) {
-          console.log(res)
           const { uri } = this.$route.query
-          this.$store.__s('user.token', res.data.tokenResultBO)
+          this.$store.__s('user.token', res.data.tokenResultBO.access_token)
+          this.$store.__s('user.refresh_token', res.data.tokenResultBO.refresh_token)
+          this.$store.__s('user.userId', res.data.tokenResultBO.userId)
           this.$store.__s('user.userInfo', res.data.userMain)
           this.$store.__s('user.login', true)
           if (uri) {
             window.location.href = uri
           } else {
-            this.$router.push('/')
+            window.location.replace('/')
           }
         }
       } catch (error) {

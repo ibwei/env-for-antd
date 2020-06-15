@@ -1,5 +1,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { SidebarOption } from '@/interface/index'
+import Store from '@/store'
 
 @Component
 export default class Spin extends Vue {
@@ -17,19 +18,26 @@ export default class Spin extends Vue {
 
   /* Life cycle */
 
+  created() {
+    const tabKeys = Store.__s('openKeys')
+    if (tabKeys.length > 0) {
+      this.openKeys = tabKeys
+    }
+  }
+
   onOpenChange(openKeys) {
     const latestOpenKey = openKeys.find((key) => this.openKeys.indexOf(key) === -1)
     if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       this.openKeys = openKeys
+      Store.__s('openKeys', openKeys)
     } else {
       this.openKeys = latestOpenKey ? [latestOpenKey] : []
+      Store.__s('openKeys', this.openKeys)
     }
   }
 
   navToPath(path: string) {
     if (!path) return
-    console.log(path)
-    console.log(this.$route)
     this.$router.push(path)
   }
 
@@ -68,7 +76,13 @@ export default class Spin extends Vue {
   render() {
     const menuList = this.MenuList.map((item) => this.renderMenuList(item))
     return (
-      <a-menu theme='dark' mode='inline' openKeys={this.openKeys} defaultSelectedKeys={this.currentKey} onOpenChange={this.onOpenChange}>
+      <a-menu
+        theme='dark'
+        mode='inline'
+        openKeys={this.openKeys}
+        defaultSelectedKeys={this.currentKey}
+        onOpenChange={this.onOpenChange}
+      >
         {menuList}
       </a-menu>
     )

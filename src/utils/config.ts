@@ -71,11 +71,11 @@ export const SidebarList: Array<SidebarOption> = [
     children: [
       {
         key: '2-0',
-        title: '云钱包'
+        title: '充币记录'
       },
       {
         key: '2-1',
-        title: '充提记录'
+        title: '提币记录'
       },
       {
         key: '2-2',
@@ -103,6 +103,10 @@ export const SidebarList: Array<SidebarOption> = [
       {
         key: '3-3',
         title: '迪富 U 盾'
+      },
+      {
+        key: '3-4',
+        title: '绑定公钥'
       }
     ]
   }

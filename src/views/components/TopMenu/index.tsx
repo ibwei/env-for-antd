@@ -9,7 +9,6 @@ import './index.less'
 export default class Spin extends Vue {
   @Prop() collapsed!: boolean
   @Emit() changeFold() {
-    console.log(this.collapsed)
     return this.$props.collapsed
   }
 
@@ -45,6 +44,7 @@ export default class Spin extends Vue {
       case '0':
         break
       case '1':
+        Store.__d('user/logout')
         this.$router.push('/user/login')
         break
       default:
@@ -103,10 +103,10 @@ export default class Spin extends Vue {
                 {this.c_userInfo?.nickImage ? (
                   <a-avatar size={26} src={this.c_userInfo.nickImage} />
                 ) : (
-                  <a-avatar size={26} icon='user' />
+                  <a-avatar size={24} icon='user' />
                 )}
                 <span class='name'>
-                  {this.c_userInfo?.nickName ? this.c_userInfo.nickName : '匿名'}
+                  {this.c_userInfo?.nickName ? this.c_userInfo.nickName : 'Me'}
                 </span>
               </span>
               <a-menu slot='overlay' on-click={this.menuClick}>

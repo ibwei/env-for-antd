@@ -4,15 +4,14 @@ import './index.less'
 @Component
 export default class Spin extends Vue {
   @Prop({ default: false }) show!: boolean
-
   @Prop({ default: '' }) text?: string
 
   render() {
     return (
       <div class={['spin-wrap', this.show ? 'show' : '']}>
         {this.show ? (
-          <div class="ant-spin ant-spin-spinning">
-            <span class="ant-spin-dot ant-spin-dot-spin">
+          <div class='ant-spin ant-spin-spinning'>
+            <span class='ant-spin-dot ant-spin-dot-spin'>
               <i></i>
               <i></i>
               <i></i>

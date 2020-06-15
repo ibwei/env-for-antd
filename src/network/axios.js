@@ -240,35 +240,33 @@ const logout = () => {
     return
   }
   loggingOut = true
-  store.dispatch('user/logout').then(() => {
-    vm.$message.closeAll()
-    vm.$message({
-      message: '登录已失效，请重新登录',
-      type: 'warning'
-    })
-    router.replace({
-      name: 'login',
-      query: {
-        uri: window.location.href
-      }
-    })
-    tokenLock = false
-    loggingOut = false
+  vm.$message.destroy()
+  vm.$message({
+    message: '登录已失效，请重新登录',
+    type: 'warning'
   })
+  router.replace({
+    name: 'login',
+    query: {
+      uri: window.location.href
+    }
+  })
+  tokenLock = false
+  loggingOut = false
 }
 
 // 刷新token
-const updateToken = () => {
+export function updateToken() {
   tokenLock = true
   return new Promise((resolve, reject) => {
     service
       .post('updateToken', {
-        refreshToken: store.state.user.userToken.refresh_token,
-        userId: store.state.user.userToken.userId
+        refreshToken: store.state.user.refresh_token,
+        userId: store.state.user.userId
       })
       .then((res) => {
-        if (res) {
-          store.commit('user/updateUserToken', res.data)
+        if (res.code === 200) {
+          store.dispatch('user/updateUserToken', res.data)
           tokenLock = false
           resolve()
         } else {

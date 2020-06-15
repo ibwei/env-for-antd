@@ -1,5 +1,7 @@
 export default {
   userInfo: null,
   token: '',
-  login: false
+  login: false,
+  refresh_token: '',
+  userId: ''
 }

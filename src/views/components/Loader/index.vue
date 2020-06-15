@@ -2,7 +2,7 @@
   <div :class="{ hidden: spinning, fullScreen: fullScreen }" class="loader">
     <div class="warpper">
       <div class="inner" />
-      <div class="txt">{{ text ? text : 'LOADING...' }}</div>
+      <div class="text">{{ text ? text : 'LOADING' }}</div>
     </div>
   </div>
 </template>
@@ -69,7 +69,6 @@ export default class Loader extends Vue {
     text-align: center;
     font-size: 12px;
     letter-spacing: 4px;
-    color: #000;
   }
 
   &.hidden {
