@@ -1,5 +1,6 @@
 import UserService from '@/network/service/UserService'
 import Store from '@/store'
+import Router from '@/router'
 export default {
   updateUserInfo(context, userInfo) {
     return new Promise((resolve, reject) => {
@@ -35,6 +36,7 @@ export default {
           Store.__s('user.userId', '')
           Store.__s('user.userInfo', null)
           Store.__s('user.login', false)
+          Router.push('/user/login')
           resolve()
         })
       })

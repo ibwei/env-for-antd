@@ -11,7 +11,6 @@
 import AppLayout from './Layout/AppLayout'
 import Loader from './views/components/Loader/index.vue'
 import { locales } from './i18n/index'
-import { updateToken } from '@/network/axios'
 
 export default {
   name: 'App',
@@ -35,8 +34,7 @@ export default {
     async initRender() {
       this.$store.__s('spinning', true)
       const user = this.$store.__s('user')
-      if (user.refresh_token) {
-        await updateToken()
+      if (user.token) {
         this.$store.__s('spinning', false)
       } else {
         this.$router.push('/user/login')

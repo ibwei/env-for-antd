@@ -45,7 +45,6 @@ export default class Spin extends Vue {
         break
       case '1':
         Store.__d('user/logout')
-        this.$router.push('/user/login')
         break
       default:
     }

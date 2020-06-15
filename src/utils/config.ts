@@ -5,7 +5,7 @@ const config = {
   footerText: `迪富借贷平台  ${new Date().getFullYear()} © 版权所有`,
   icon: '/favicon.ico',
   // 全屏页面
-  fullPages: ['/user/login', '/404', '/401']
+  fullPages: ['/user/login', '/user/register', '/404', '/401']
 }
 
 export const ColorArray = ['pink', 'red', 'orange', 'cyan', 'green', 'blue', 'purple', 'geekblue', 'magenta', 'volcano', 'gold', 'lime']

@@ -6,6 +6,7 @@ import router from '@/router'
 import encryption from '@/utils/rsa'
 import { find, isEmpty, forOwn } from 'lodash'
 import vm from '../main'
+import { setTimeout } from 'timers'
 /* eslint-disable */
 
 const EspecialURL = [
@@ -28,6 +29,7 @@ const service = Axios.create({
 let tokenLock = false // 刷新token时加锁
 let refresh // 刷新的异步请求
 let loggingOut = false // 退出锁
+let isError = false
 
 // 请求拦截器
 service.interceptors.request.use(
@@ -90,10 +92,7 @@ service.interceptors.response.use(
       case 'tokenError':
         return handleTokenError(response)
       case 'error':
-        vm.$message({
-          message: response.data.message,
-          type: 'warning'
-        })
+        vm.$message.warning(response.data.message)
         return Promise.resolve(0)
       default:
         return response.data
@@ -101,16 +100,17 @@ service.interceptors.response.use(
   },
   function (error) {
     if (error.response) {
-      vm.$message({
-        message: `${error.response.status}:${error.response.statusText}`,
-        type: 'error'
-      })
+      vm.$message.error(`${error.response.status}:${error.response.statusText}`)
       return Promise.reject(error.response.data)
     } else {
-      vm.$message({
-        message: '当前网络不可用，请检查您的网络设置',
-        type: 'error'
-      })
+      // 避免多次调用错误提示
+      if (!isError) {
+        vm.$message.error('当前网络不可用，请检查您的网络设置')
+      }
+      isError = true
+      setTimeout(() => {
+        isError = false
+      }, 2000)
 
       return Promise.resolve(0)
     }
@@ -141,10 +141,7 @@ const classifyCode = (code) => {
 const handleCommonError = (response) => {
   switch (response.data.code) {
     case 501: // 账户被冻结
-      vm.$message({
-        message: response.data.message,
-        type: 'warning'
-      })
+      vm.$message.error(response.data.message)
       logout()
       return Promise.resolve(0)
     case 510: // 需要谷歌验证码
@@ -184,10 +181,7 @@ const handleCommonError = (response) => {
           return Promise.reject(err)
         })
     default:
-      vm.$message({
-        message: response.data.message,
-        type: 'warning'
-      })
+      vm.$message.warning(response.data.message)
       return Promise.resolve(0)
   }
 }
@@ -241,10 +235,7 @@ const logout = () => {
   }
   loggingOut = true
   vm.$message.destroy()
-  vm.$message({
-    message: '登录已失效，请重新登录',
-    type: 'warning'
-  })
+  vm.$message.warning('登录已失效，请重新登录')
   router.replace({
     name: 'login',
     query: {
